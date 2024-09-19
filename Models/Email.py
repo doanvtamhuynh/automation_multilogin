@@ -1,5 +1,3 @@
-# Models/Email.py
-
 class NewEmail:
     def __init__(self, email, password, recovery):
         self._email = email
