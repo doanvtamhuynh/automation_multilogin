@@ -4,8 +4,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Models.Email import NewEmail
+import time
 
-def Login_GG(driver: webdriver, email: NewEmail):
+def GG_Login(driver: webdriver, email: NewEmail):
     try:
         driver.get("https://accounts.google.com/")
 
@@ -40,3 +41,17 @@ def Login_GG(driver: webdriver, email: NewEmail):
 
     except:
         print("[INFO] Error Login Google")
+
+def GG_Translate(driver: webdriver, wordList: list):
+    try:
+        for word in wordList:
+            try:
+                driver.get('https://translate.google.com/')
+                wait = WebDriverWait(driver, 60)
+                input_word = wait.until(EC.presence_of_element_located((By.XPATH, "(//div[@class='n4sEPd']//c-wiz)[1]")))
+                input_word.send_keys(word)
+                time.sleep(3)
+            except:
+                continue
+    except:
+        print("[INFO] Error GG Translate")
