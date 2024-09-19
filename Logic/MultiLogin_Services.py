@@ -22,29 +22,29 @@ def signin(username: str, password: str) -> str:
         print(f"\n[INFO] Error during login: {r.text}\n")
     else:
         response = r.json()["data"]
-    token = response["token"]
-    return token
-
+        token = response["token"]
+        return token
+    return None
 
 def Start(username: str, password: str, profile: NewProfile) -> webdriver:
     token = signin(username,password)
-    HEADERS.update({"Authorization": f"Bearer {token}"})
-
-    r = requests.get(
-        f"{MLX_LAUNCHER_V2}/profile/f/{profile.folderID}/p/{profile.profileID}/start?automation_type=selenium",
-        headers=HEADERS,
-    )
-    response = r.json()
-    if r.status_code != 200:
-        print(f"\n[INFO] Error while starting profile: {r.text}\n")
-    else:
-        print(f"\n[INFO] Profile {profile.profileID} started.\n")
-    selenium_port = response["data"]["port"]
-    driver = webdriver.Remote(
-        command_executor=f"{LOCALHOST}:{selenium_port}", options=ChromiumOptions()
-    )
-    return driver
-
+    if token is not None:
+        HEADERS.update({"Authorization": f"Bearer {token}"})
+        r = requests.get(
+            f"{MLX_LAUNCHER_V2}/profile/f/{profile.folderID}/p/{profile.profileID}/start?automation_type=selenium",
+            headers=HEADERS,
+        )
+        response = r.json()
+        if r.status_code != 200:
+            print(f"\n[INFO] Error while starting profile: {r.text}\n")
+        else:
+            print(f"\n[INFO] Profile {profile.profileID} started.\n")
+        selenium_port = response["data"]["port"]
+        driver = webdriver.Remote(
+            command_executor=f"{LOCALHOST}:{selenium_port}", options=ChromiumOptions()
+        )
+        return driver
+    return None
 
 def Stop(profile: NewProfile) -> None:
     r = requests.get(f"{MLX_LAUNCHER}/profile/stop/p/{profile.profileID}", headers=HEADERS)

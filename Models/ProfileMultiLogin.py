@@ -20,4 +20,4 @@ class NewProfile:
         self._folderID = new_folderID
 
     def __str__(self):
-        return f"Profile_ID: {self._profileID}, Folder_ID: {self._folderID}"
+        return f"[INFO] Profile_ID: {self._profileID}, Folder_ID: {self._folderID}"

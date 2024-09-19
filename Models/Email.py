@@ -29,4 +29,4 @@ class NewEmail:
         self._recovery = new_recovery
 
     def __str__(self):
-        return f"Email: {self._email}, Password: {self._password}, Recovery Email: {self._recovery}"
+        return f"[INFO] Email: {self._email}, Password: {self._password}, Recovery Email: {self._recovery}"
