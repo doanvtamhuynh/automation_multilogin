@@ -9,11 +9,17 @@ import Logic.Gmail_Services as Gmail
 
 ACCOUNT_USERNAME = "username"
 ACCOUNT_PASSWORD = "password"
+
 listEmail = ReadFile.GetListEmail("G:\Code\listEmail.txt")
 if listEmail is not None:
     email = listEmail[0]
 #email = NewEmail("email@gmail.com","password","recovery@gmail.com")
-profile = NewProfile("profile_id", "folder_id")
+
+listProfile = ReadFile.GetListProfile("G:\Code\listProfile.txt")
+if listProfile is not None:
+    profile = listProfile[0]
+#profile = NewProfile("profile_id", "folder_id")
+
 listWordTranslate = ["hello", "thanks", "good"]
 listWordAlert = ["usa", "car", "football"]
 print(email)
