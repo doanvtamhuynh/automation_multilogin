@@ -19,6 +19,6 @@ def GetListEmail(src: str) -> list:
         for line in lines:
             line.strip()
             detail_Line = line.split("|")
-            new_Email = Email(detail_Line[1],detail_Line[2],detail_Line[3])
+            new_Email = Email(detail_Line[0],detail_Line[1],detail_Line[2])
             listEmail.append(new_Email)
     return listEmail
