@@ -42,6 +42,19 @@ def GG_Login(driver: webdriver, email: NewEmail):
     except:
         print("[INFO] Error Login Google")
 
+def Login_Third_Website(driver: webdriver):
+    try:
+        wait = WebDriverWait(driver, 60)
+        select_account = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@data-authuser='0']")))
+        select_account.click()
+        time.sleep(1)
+        wait = WebDriverWait(driver, 60)
+        btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[2]")))
+        btn_Continue.click()
+
+    except:
+        print("[INFO] Error Login third website with Google")
+
 def GG_Translate(driver: webdriver, wordList: list):
     try:
         for word in wordList:
@@ -74,15 +87,3 @@ def GG_ALert(driver: webdriver, wordList: list):
     except:
         print("[INFO] Error GG Alert")
 
-def Login_Third_Website(driver: webdriver):
-    try:
-        wait = WebDriverWait(driver, 60)
-        select_account = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@data-authuser='0']")))
-        select_account.click()
-        time.sleep(1)
-        wait = WebDriverWait(driver, 60)
-        btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[2]")))
-        btn_Continue.click()
-
-    except:
-        print("[INFO] Error Login third website with Google")

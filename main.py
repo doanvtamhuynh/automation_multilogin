@@ -4,12 +4,16 @@ import Logic.MultiLogin_Services as MultiLogin
 import Logic.Google_Services as Google
 import time
 import Logic.OtherWebsite_Services as OtherWebsite
+import Logic.ReadFile as ReadFile
 
 ACCOUNT_USERNAME = "username"
 ACCOUNT_PASSWORD = "password"
-email = NewEmail("email@gmail.com","password","recovery@gmail.com")
+listEmail = ReadFile.GetListEmail("G:\Code\listEmail.txt")
+email = listEmail[0]
+#email = NewEmail("email@gmail.com","password","recovery@gmail.com")
 profile = NewProfile("profile_id","folder_id")
-listWord = ["hello","thanks","good"]
+listWordTranslate = ["hello","thanks","good"]
+listWordAlert = ["usa","car","football"]
 print(email)
 print(profile)
 
@@ -18,9 +22,9 @@ if driver is not None:
 
     Google.GG_Login(driver,email)
     time.sleep(1)
-    Google.GG_Translate(driver, listWord)
+    Google.GG_Translate(driver, listWordTranslate)
     time.sleep(1)
-    Google.GG_ALert(driver, listWord)
+    Google.GG_ALert(driver, listWordAlert)
     time.sleep(1)
     OtherWebsite.Website_TLDR(driver, email)
     time.sleep(1)
