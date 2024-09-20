@@ -129,3 +129,44 @@ def Website_Batdongsan(driver: webdriver):
         btn_Submit.click()
     except:
         print("[INFO] Error Website Bat Dong San")
+
+def Website_Dictionary(driver: webdriver, email: NewEmail):
+    try:
+        driver.get("https://www.dictionary.com/")
+
+        wait = WebDriverWait(driver, 60)
+        input_email = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='text'])[2]")))
+        input_email.send_keys(email.email)
+
+        btn_submit = driver.find_element("(//button[@type='submit'])[2]")
+        btn_submit.click()
+    except:
+        print("[INFO] Error Website Dictionary")
+
+def Website_ITViec(driver: webdriver):
+    try:
+        driver.get("https://itviec.com/sign_in")
+
+        wait = WebDriverWait(driver, 60)
+        btn_LoginGG = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='submit'])[1]")))
+        btn_LoginGG.click()
+        Google.Login_Third_Website(driver)
+        time.sleep(5)
+        btn_Next = driver.find_element("(//button[@type='button'])[1]")
+        btn_Next.click()
+
+        wait = WebDriverWait(driver, 60)
+        btn_Select_Java = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='checkbox'])[1]")))
+        btn_Select_Java.click()
+        btn_Select_ReactJs = driver.find_element("(//input[@type='checkbox'])[2]")
+        btn_Select_ReactJs.click()
+        btn_Select_DotNet = driver.find_element("(//input[@type='checkbox'])[3]")
+        btn_Select_DotNet.click()
+        btn_Select_HCM = driver.find_element("(//input[@type='radio'])[1]")
+        btn_Select_HCM.click()
+
+        wait = WebDriverWait(driver, 60)
+        btn_Subcribe = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@data-jr-onboarding-target='buttonSubmit'])")))
+        btn_Subcribe.click()
+    except:
+        print("[INFO] Error website ITViec")
