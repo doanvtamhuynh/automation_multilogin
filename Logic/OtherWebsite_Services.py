@@ -138,7 +138,7 @@ def Website_Dictionary(driver: webdriver, email: NewEmail):
         input_email = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='text'])[2]")))
         input_email.send_keys(email.email)
 
-        btn_submit = driver.find_element("(//button[@type='submit'])[2]")
+        btn_submit = driver.find_element(By.XPATH, "(//button[@type='submit'])[2]")
         btn_submit.click()
     except:
         print("[INFO] Error Website Dictionary")
@@ -152,17 +152,17 @@ def Website_ITViec(driver: webdriver):
         btn_LoginGG.click()
         Google.Login_Third_Website(driver)
         time.sleep(5)
-        btn_Next = driver.find_element("(//button[@type='button'])[1]")
+        btn_Next = driver.find_element(By.XPATH, "(//button[@type='button'])[1]")
         btn_Next.click()
 
         wait = WebDriverWait(driver, 60)
         btn_Select_Java = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='checkbox'])[1]")))
         btn_Select_Java.click()
-        btn_Select_ReactJs = driver.find_element("(//input[@type='checkbox'])[2]")
+        btn_Select_ReactJs = driver.find_element(By.XPATH, "(//input[@type='checkbox'])[2]")
         btn_Select_ReactJs.click()
-        btn_Select_DotNet = driver.find_element("(//input[@type='checkbox'])[3]")
+        btn_Select_DotNet = driver.find_element(By.XPATH, "(//input[@type='checkbox'])[3]")
         btn_Select_DotNet.click()
-        btn_Select_HCM = driver.find_element("(//input[@type='radio'])[1]")
+        btn_Select_HCM = driver.find_element(By.XPATH, "(//input[@type='radio'])[1]")
         btn_Select_HCM.click()
 
         wait = WebDriverWait(driver, 60)
@@ -170,3 +170,43 @@ def Website_ITViec(driver: webdriver):
         btn_Subcribe.click()
     except:
         print("[INFO] Error website ITViec")
+
+def Website_Quora(driver: webdriver):
+    try:
+        driver.get("https://humanity.quora.com")
+
+        wait = WebDriverWait(driver, 60)
+        btn_SignIn = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[3]")))
+        btn_SignIn.click()
+
+        wait = WebDriverWait(driver, 60)
+        btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "(//span[@class='c13dhsxm'])[1]")))
+        btn_Continue.click()
+        Google.Login_Third_Website(driver)
+        time.sleep(2)
+
+        driver.get("https://humanity.quora.com")
+        wait = WebDriverWait(driver, 60)
+        btn_Follow = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[6]")))
+        btn_Follow.click()
+
+        wait = WebDriverWait(driver, 60)
+        btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@role='button'])[8]")))
+        btn_Bell.click()
+
+        wait = WebDriverWait(driver, 60)
+        checkbox_AllPost = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='radio'])[1]")))
+        checkbox_AllPost.click()
+
+        btn_Email = driver.find_element(By.XPATH, "(//input[@type='checkbox'])[2]")
+        attribute_value_btn_Email = btn_Email.get_attribute("aria-checked")
+        if attribute_value_btn_Email == "false":
+            btn_Email.click()
+
+        driver.get("https://www.quora.com/settings/notifications")
+        wait = WebDriverWait(driver, 60)
+        btn_Daily = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='radio'])[2]")))
+        btn_Daily.click()
+
+    except:
+        print("[INFO] Error website Quora")
