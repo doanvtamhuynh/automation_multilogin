@@ -55,3 +55,21 @@ def GG_Translate(driver: webdriver, wordList: list):
                 continue
     except:
         print("[INFO] Error GG Translate")
+
+def GG_ALert(driver: webdriver, wordList: list):
+    try:
+        for word in wordList:
+            try:
+                driver.get("https://www.google.com/alerts")
+                wait = WebDriverWait(driver, 60)
+                input_word = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='text']")))
+                input_word.send_keys(word)
+
+                wait = WebDriverWait(driver, 60)
+                click_alert = wait.until(EC.presence_of_element_located((By.XPATH, "//span[@id='create_alert']")))
+                click_alert.click()
+                time.sleep(3)
+            except:
+                continue
+    except:
+        print("[INFO] Error GG Alert")

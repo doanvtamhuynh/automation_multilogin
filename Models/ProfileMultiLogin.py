@@ -9,7 +9,7 @@ class NewProfile:
 
     @property
     def folderID(self):
-        return  self.folderID
+        return  self._folderID
 
     @profileID.setter
     def profileID(self, new_profileID):
