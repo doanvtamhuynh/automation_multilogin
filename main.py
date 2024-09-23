@@ -57,7 +57,6 @@ if driver is not None:
         time.sleep(1)
         OtherWebsite.Website_Batdongsan(driver)
         time.sleep(1)
-
         OtherWebsite.Website_Foxnews(driver, email)
         time.sleep(1)
 
@@ -68,5 +67,5 @@ if driver is not None:
         time.sleep(1)
         Gmail.ReadMail_InfoQ(driver)
 
-        time.sleep(5)
-        MultiLogin.Stop(profile)
+    time.sleep(5)
+    MultiLogin.Stop(profile)
