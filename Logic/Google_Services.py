@@ -17,16 +17,19 @@ def GG_Login(driver: webdriver, email: NewEmail):
 
         wait = WebDriverWait(driver, 60)
         input_password = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='password'][@name='Passwd']")))
+        time.sleep(2)
         input_password.send_keys(email.password)
         input_password.send_keys(Keys.ENTER)
 
         try:
             wait = WebDriverWait(driver, 20)
             click_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//ul[@class='Dl08I']//li[3]")))
+            time.sleep(2)
             click_recovery.click()
 
             wait = WebDriverWait(driver, 20)
             input_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
+            time.sleep(2)
             input_recovery.send_keys(email.recovery)
             input_recovery.send_keys(Keys.ENTER)
         except:
@@ -35,6 +38,7 @@ def GG_Login(driver: webdriver, email: NewEmail):
         try:
             wait = WebDriverWait(driver, 5)
             simple_login = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[2]")))
+            time.sleep(2)
             simple_login.click()
         except:
             print("[INFO] No need to enter simple_login")
@@ -46,10 +50,12 @@ def Login_Third_Website(driver: webdriver):
     try:
         wait = WebDriverWait(driver, 60)
         select_account = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@data-authuser='0']")))
+        time.sleep(2)
         select_account.click()
         time.sleep(1)
         wait = WebDriverWait(driver, 60)
         btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[2]")))
+        time.sleep(2)
         btn_Continue.click()
 
     except:
@@ -62,6 +68,7 @@ def GG_Translate(driver: webdriver, wordList: list):
                 driver.get('https://translate.google.com/')
                 wait = WebDriverWait(driver, 60)
                 input_word = wait.until(EC.presence_of_element_located((By.XPATH, "(//div[@class='n4sEPd']//c-wiz)[1]")))
+                time.sleep(2)
                 input_word.send_keys(word)
                 time.sleep(3)
             except:
@@ -76,10 +83,12 @@ def GG_ALert(driver: webdriver, wordList: list):
                 driver.get("https://www.google.com/alerts")
                 wait = WebDriverWait(driver, 60)
                 input_word = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='text']")))
+                time.sleep(2)
                 input_word.send_keys(word)
 
                 wait = WebDriverWait(driver, 60)
                 click_alert = wait.until(EC.presence_of_element_located((By.XPATH, "//span[@id='create_alert']")))
+                time.sleep(2)
                 click_alert.click()
                 time.sleep(3)
             except:

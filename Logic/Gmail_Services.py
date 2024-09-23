@@ -14,6 +14,7 @@ def ReadMail(driver: webdriver, nameMail: str, href: str):
         try:
             wait = WebDriverWait(driver, 60)
             input_text = wait.until(EC.presence_of_element_located((By.XPATH, "id('aso_search_form_anchor')/DIV[1]//input")))
+            time.sleep(2)
             input_text.send_keys(f"{nameMail}")
             driver.send_keys(Keys.ENTER)
             find_email = True
@@ -21,6 +22,7 @@ def ReadMail(driver: webdriver, nameMail: str, href: str):
             try:
                 wait = WebDriverWait(driver, 60)
                 input_text = wait.until(EC.presence_of_element_located((By.XPATH, "//form[id('aso_search_form_anchor')]/div[1]//input")))
+                time.sleep(2)
                 input_text.send_keys(f"{nameMail}")
                 driver.send_keys(Keys.ENTER)
                 find_email = True
@@ -29,11 +31,11 @@ def ReadMail(driver: webdriver, nameMail: str, href: str):
         if find_email is True:
             div_element = driver.find_element(By.CSS_SELECTOR, ".ae4.UI.aZ6")
             tr_element = div_element.find_element(By.CSS_SELECTOR, "table tbody tr")
+            time.sleep(2)
             tr_element.click()
 
             wait = WebDriverWait(driver, 60)
-            element_link = wait.until(
-                EC.presence_of_element_located((By.XPATH, f"(//a[contains(@href, '{href}')])[1]")))
+            element_link = wait.until(EC.presence_of_element_located((By.XPATH, f"(//a[contains(@href, '{href}')])[1]")))
             link = element_link.get_attribute("href")
 
             driver.get(link)
