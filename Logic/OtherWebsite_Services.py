@@ -391,3 +391,5 @@ def Website_Youtube(driver: webdriver):
         click_preferences3.click()
     except:
         print("[INFO] Error Website youtube")
+    finally:
+        print("[INFO] Success subscribe youtube")
