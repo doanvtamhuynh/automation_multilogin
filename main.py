@@ -11,15 +11,15 @@ from Logic.WriteFile import WriteInfo
 ACCOUNT_USERNAME = "username"
 ACCOUNT_PASSWORD = "password"
 
-listEmail = ReadFile.GetListEmail(r"G:\Code\listEmail.txt")
+src = r"G:\Code\Automation_MultiLogin\ListFile"
+
+listEmail = ReadFile.GetListEmail(rf"{src}\listEmail.txt")
 if listEmail is not None:
     email = listEmail[0]
-#email = NewEmail("email@gmail.com","password","recovery@gmail.com")
 
-listProfile = ReadFile.GetListProfile(r"G:\Code\listProfile.txt")
+listProfile = ReadFile.GetListProfile(rf"{src}\listProfile.txt")
 if listProfile is not None:
     profile = listProfile[0]
-#profile = NewProfile("profile_id", "folder_id")
 
 listWordTranslate = ["hello", "thanks", "good"]
 listWordAlert = ["usa", "car", "football"]
@@ -37,16 +37,19 @@ if driver is not None:
         # Create info
         newInfoAccount = ReadFile.GetInfoAccount()
         print(newInfoAccount)
-        WriteInfo(email, newInfoAccount, r"G:\Code\ListFile\newEmail.txt")
 
         # Google Services
         Google.Change_Info(driver, newInfoAccount)
+        WriteInfo(email, newInfoAccount, rf"{src}\newEmail.txt")
+
         Google.GG_Translate(driver, listWordTranslate)
         time.sleep(1)
         Google.GG_ALert(driver, listWordAlert)
         time.sleep(1)
 
         #Sign In Other Website
+        OtherWebsite.Website_Youtube(driver)
+        time.sleep(1)
         OtherWebsite.Website_TLDR(driver, email)
         time.sleep(1)
         OtherWebsite.Website_Envalior(driver, email)

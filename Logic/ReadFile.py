@@ -3,6 +3,8 @@ from Models.Email import NewEmail as Email
 from Models.InfoAccount import NewInfo as Info
 import random
 
+src = r"G:\Code\Automation_MultiLogin\ListFile"
+
 
 def GetListEmail(src: str) -> list:
     result = False
@@ -50,43 +52,53 @@ def GetListProfile(src: str) -> list:
 
 def GetInfoAccount() -> Info:
     try:
-        with open(r"G:\Code\ListFile\listPassword.txt") as file:
-            lines = file.readlines()
-        password = lines[random(len(lines))]
+        with open(rf"{src}\listPassword.txt", 'r') as file:
+            listPass = file.readlines()
+        index = random.randint(0, len(listPass) - 1)
+        password = listPass[index]
+        password.replace("\n","")
     except:
         print("[INFO] File Password empty")
         password = "duchanh456"
 
     try:
-        with open(r"G:\Code\ListFile\listRecovery.txt") as file:
-            lines = file.readlines()
-        recovery = lines[random(len(lines))]
+        with open(rf"{src}\listRecovery.txt", "r") as file:
+            listRecovery = file.readlines()
+        index = random.randint(0, len(listRecovery) - 1)
+        recovery = listRecovery[index]
+        recovery.replace("\n", "")
     except:
         print("[INFO] File Recovery empty")
         recovery = "milleroainum@gmail.com"
 
     try:
-        with open(r"G:\Code\ListFile\listHo.txt") as file:
-            lines = file.readlines()
-        ho = lines[random(len(lines))]
+        with open(rf"{src}\listHo.txt", "r", encoding='utf-8') as file:
+            listHo = file.readlines()
+        index = random.randint(0, len(listHo) - 1)
+        ho = listHo[index]
+        ho.replace("\n", "")
     except:
         print("[INFO] File Ho empty")
         ho = "Nguyen"
 
     try:
-        with open(r"G:\Code\ListFile\listTen.txt") as file:
-            lines = file.readlines()
-        ten = lines[random(len(lines))]
+        with open(rf"{src}\listTen.txt", "r", encoding='utf-8') as file:
+            listTen = file.readlines()
+        index = random.randint(0, len(listTen) - 1)
+        ten = listTen[index]
+        ten.replace("\n", "")
     except:
         print("[INFO] File Ten empty")
         ten = "Nhi"
 
     try:
-        with open(r"G:\Code\ListFile\listDiaChi.txt") as file:
-            lines = file.readlines()
-        index = random(2, len(lines) - 2)
-        homeAddress = lines[index]
-        workAddress = lines[index + 1]
+        with open(rf"{src}\listDiaChi.txt", "r", encoding='utf-8') as file:
+            listDiachi = file.readlines()
+        index = random.randint(2, len(listDiachi) - 2)
+        homeAddress = listDiachi[index]
+        homeAddress.replace("\n", "")
+        workAddress = listDiachi[index + 1]
+        workAddress.replace("\n", "")
     except:
         print("[INFO] File Dia chi empty")
         homeAddress = "32, Đường Nguyễn Khắc Viện, Quận 9, TP. Hồ Chí Minh"

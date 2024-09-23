@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from Models.Email import NewEmail
 from Models.InfoAccount import NewInfo
 import time
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 def GG_Login(driver: webdriver, email: NewEmail) -> bool:
@@ -25,7 +26,7 @@ def GG_Login(driver: webdriver, email: NewEmail) -> bool:
 
         try:
             wait = WebDriverWait(driver, 10)
-            click_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//ul[@class='Dl08I']//li[3]")))
+            click_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@data-challengeid='5']")))
             time.sleep(2)
             click_recovery.click()
 
@@ -44,13 +45,11 @@ def GG_Login(driver: webdriver, email: NewEmail) -> bool:
             simple_login.click()
         except:
             print("[INFO] No need to enter simple_login")
-
+        print("[INFO] Success Login Google")
+        return True
     except:
         print("[INFO] Error Login Google")
         return False
-    finally:
-        print("[INFO] Success Login Google")
-        return True
 
 def Login_Third_Website(driver: webdriver) -> bool:
     try:
@@ -80,10 +79,9 @@ def GG_Translate(driver: webdriver, wordList: list):
                 time.sleep(3)
             except:
                 continue
+        print("[INFO] Success GG Translate")
     except:
         print("[INFO] Error GG Translate")
-    finally:
-        print("[INFO] Success GG Translate")
 
 def GG_ALert(driver: webdriver, wordList: list):
     try:
@@ -102,10 +100,9 @@ def GG_ALert(driver: webdriver, wordList: list):
                 time.sleep(3)
             except:
                 continue
+        print("[INFO] Success GG GG Alert")
     except:
         print("[INFO] Error GG Alert")
-    finally:
-        print("[INFO] Success GG GG Alert")
 
 def Change_Info(driver: webdriver, infoAccount: NewInfo):
     try:
@@ -113,34 +110,41 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo):
         wait = WebDriverWait(driver, 60)
         input_ten = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='text'])[2]")))
         time.sleep(2)
+        input_ten.click()
+        actions = ActionChains(driver)
+        actions.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()
+        time.sleep(1)
         input_ten.send_keys(infoAccount.ten)
         time.sleep(2)
         input_ho = driver.find_element(By.XPATH, "(//input[@type='text'])[3]")
+        input_ho.click()
+        actions = ActionChains(driver)
+        actions.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()
+        time.sleep(1)
         input_ho.send_keys(infoAccount.ho)
 
         wait = WebDriverWait(driver, 10)
         btn_Save = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@jsname='Pr7Yme'])[3]")))
         time.sleep(2)
         btn_Save.click()
+        print("[INFO] Success change name")
     except:
         print("[INFO] Error change name")
-    finally:
-        print("[INFO] Success change name")
 
     try:
         driver.get("https://myaccount.google.com/recovery/email")
         wait = WebDriverWait(driver, 60)
         input_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
         time.sleep(2)
-        input_recovery.send_keys(infoAccount.recovery)
-        wait = WebDriverWait(driver, 10)
-        btn_Save = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@jsname='Pr7Yme'])[3]")))
+        input_recovery.click()
+        actions = ActionChains(driver)
+        actions.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()
         time.sleep(1)
-        btn_Save.click()
-    except:
-        print("[INFO] Error change recovery")
-    finally:
+        input_recovery.send_keys(infoAccount.recovery)
+        input_recovery.send_keys(Keys.ENTER)
         print("[INFO] Success change recovery")
+    except Exception as ex:
+        print(f"[INFO] Error change recovery: {ex}")
 
     try:
         driver.get("https://myaccount.google.com/gender")
@@ -148,44 +152,49 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo):
         btn_gender = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='radio'])[1]")))
         time.sleep(2)
         btn_gender.click()
+        print("[INFO] Success change gender")
     except:
         print("[INFO] Error change gender")
-    finally:
-        print("[INFO] Success change gender")
 
     try:
         driver.get("https://myaccount.google.com/address/home")
         wait = WebDriverWait(driver, 60)
         input_address = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='text'])[2]")))
         time.sleep(2)
+        input_address.click()
+        actions = ActionChains(driver)
+        actions.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()
+        time.sleep(1)
         input_address.send_keys(infoAccount.homeAddress)
 
         try:
             wait = WebDriverWait(driver, 5)
             btn_Save = wait.until(EC.presence_of_element_located((By.XPATH, "(//div[@jsname='y863Ob'])")))
             time.sleep(2)
-            driver.send_keys(Keys.TAB)
-            time.sleep(0.5)
-            driver.send_keys(Keys.TAB)
-            time.sleep(0.5)
-            driver.send_keys(Keys.TAB)
-            time.sleep(0.5)
-            driver.send_keys(Keys.ENTER)
+
+            actions = ActionChains(driver)
+            actions.send_keys(Keys.TAB).perform()
+            actions.send_keys(Keys.TAB).perform()
+            actions.send_keys(Keys.TAB).perform()
+            time.sleep(2)
+            actions.send_keys(Keys.RETURN).perform()
         except:
-            driver.send_keys(Keys.TAB)
-            time.sleep(0.5)
-            driver.send_keys(Keys.TAB)
-            time.sleep(0.5)
-            driver.send_keys(Keys.ENTER)
+            actions = ActionChains(driver)
+            actions.send_keys(Keys.TAB).perform()
+            actions.send_keys(Keys.TAB).perform()
+            time.sleep(2)
+            actions.send_keys(Keys.RETURN).perform()
+        print("[INFO] Success change home address")
     except:
         print("[INFO] Error change home address")
-    finally:
-        print("[INFO] Success change home address")
 
     try:
         driver.get("https://myaccount.google.com/address/work")
         wait = WebDriverWait(driver, 60)
         input_address = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='text'])[2]")))
+        input_address.click()
+        actions = ActionChains(driver)
+        actions.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()
         time.sleep(2)
         input_address.send_keys(infoAccount.workAddress)
 
@@ -193,23 +202,22 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo):
             wait = WebDriverWait(driver, 5)
             btn_Save = wait.until(EC.presence_of_element_located((By.XPATH, "(//div[@jsname='y863Ob'])")))
             time.sleep(2)
-            driver.send_keys(Keys.TAB)
-            time.sleep(0.5)
-            driver.send_keys(Keys.TAB)
-            time.sleep(0.5)
-            driver.send_keys(Keys.TAB)
-            time.sleep(0.5)
-            driver.send_keys(Keys.ENTER)
+
+            actions = ActionChains(driver)
+            actions.send_keys(Keys.TAB).perform()
+            actions.send_keys(Keys.TAB).perform()
+            actions.send_keys(Keys.TAB).perform()
+            time.sleep(2)
+            actions.send_keys(Keys.RETURN).perform()
         except:
-            driver.send_keys(Keys.TAB)
-            time.sleep(0.5)
-            driver.send_keys(Keys.TAB)
-            time.sleep(0.5)
-            driver.send_keys(Keys.ENTER)
+            actions = ActionChains(driver)
+            actions.send_keys(Keys.TAB).perform()
+            actions.send_keys(Keys.TAB).perform()
+            time.sleep(2)
+            actions.send_keys(Keys.RETURN).perform()
+        print("[INFO] Success change work address")
     except:
         print("[INFO] Error change work address")
-    finally:
-        print("[INFO] Success change work address")
 
     try:
         driver.get("https://myaccount.google.com/signinoptions/password")
@@ -221,8 +229,9 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo):
         re_enter_password = driver.find_element(By.XPATH, "(//input[@type='password'])[2]")
         time.sleep(1)
         re_enter_password.send_keys(infoAccount.password)
-        driver.send_keys(Keys.ENTER)
+        time.sleep(1)
+        actions = ActionChains(driver)
+        actions.send_keys(Keys.RETURN).perform()
+        print("[INFO] Success change password")
     except:
         print("[INFO] Error change password")
-    finally:
-        print("[INFO] Success change password")

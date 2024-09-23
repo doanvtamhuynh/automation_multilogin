@@ -59,11 +59,9 @@ def Website_TLDR(driver: webdriver, email: NewEmail):
         btn_submit = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
         time.sleep(2)
         btn_submit.click()
-
+        print("[INFO] Success Website https://tldr.tech/")
     except:
         print("[INFO] Error Website https://tldr.tech/")
-    finally:
-        print("[INFO] Success Website https://tldr.tech/")
 
 def Website_Envalior(driver: webdriver, email: NewEmail):
     try:
@@ -84,10 +82,9 @@ def Website_Envalior(driver: webdriver, email: NewEmail):
             btn_submit = driver.find_element(By.XPATH, "//button[@type='submit']")
             time.sleep(2)
             btn_submit.click()
+        print("[INFO] Success Website https://www.envalior.com/")
     except:
         print("[INFO] Error Website https://www.envalior.com/")
-    finally:
-        print("[INFO] Success Website https://www.envalior.com/")
 
 def Website_Foxnews(driver: webdriver, email: NewEmail):
     try:
@@ -135,10 +132,9 @@ def Website_Foxnews(driver: webdriver, email: NewEmail):
         driver.send_keys(Keys.TAB)
         driver.send_keys(Keys.TAB)
         driver.send_keys(Keys.ENTER)
+        print("[INFO] Success Website https://www.foxnews.com/newsletters")
     except:
         print("[INFO] Error Website https://www.foxnews.com/newsletters")
-    finally:
-        print("[INFO] Success Website https://www.foxnews.com/newsletters")
 
 def Website_Batdongsan(driver: webdriver):
     try:
@@ -175,10 +171,9 @@ def Website_Batdongsan(driver: webdriver):
             btn_Submit = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@tracking-id='click-save-search-alert-option1']")))
             time.sleep(2)
             btn_Submit.click()
+        print("[INFO] Success Website Bat Dong San")
     except:
         print("[INFO] Error Website Bat Dong San")
-    finally:
-        print("[INFO] Success Website Bat Dong San")
 
 def Website_Dictionary(driver: webdriver, email: NewEmail):
     try:
@@ -192,10 +187,9 @@ def Website_Dictionary(driver: webdriver, email: NewEmail):
         btn_submit = driver.find_element(By.XPATH, "(//button[@type='submit'])[2]")
         time.sleep(2)
         btn_submit.click()
+        print("[INFO] Success Website Dictionary")
     except:
         print("[INFO] Error Website Dictionary")
-    finally:
-        print("[INFO] Success Website Dictionary")
 
 def Website_ITViec(driver: webdriver):
     try:
@@ -229,10 +223,10 @@ def Website_ITViec(driver: webdriver):
             btn_Subcribe = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@data-jr-onboarding-target='buttonSubmit'])")))
             time.sleep(2)
             btn_Subcribe.click()
+        print("[INFO] Success website ITViec")
     except:
         print("[INFO] Error website ITViec")
-    finally:
-        print("[INFO] Success website ITViec")
+
 
 def Website_Quora(driver: webdriver):
     try:
@@ -278,10 +272,9 @@ def Website_Quora(driver: webdriver):
             btn_Daily = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='radio'])[2]")))
             time.sleep(2)
             btn_Daily.click()
+        print("[INFO] Success website Quora")
     except:
         print("[INFO] Error website Quora")
-    finally:
-        print("[INFO] Success website Quora")
 
 def Website_InfoQ(driver: webdriver, email: NewEmail):
     try:
@@ -345,10 +338,9 @@ def Website_InfoQ(driver: webdriver, email: NewEmail):
         wait = WebDriverWait(driver, 60)
         click_submitForm = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit' and contains(@onclick,'submitForm')]")))
         click_submitForm.click()
+        print("[INFO] Success Website https://infoq.vn/Registers/index")
     except:
         print("[INFO] Error Website https://infoq.vn/Registers/index")
-    finally:
-        print("[INFO] Success Website https://infoq.vn/Registers/index")
 
 def Website_Youtube(driver: webdriver):
     try:
@@ -389,7 +381,6 @@ def Website_Youtube(driver: webdriver):
         click_preferences3 = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[3]//tp-yt-paper-toggle-button")
         time.sleep(2)
         click_preferences3.click()
+        print("[INFO] Success subscribe youtube")
     except:
         print("[INFO] Error Website youtube")
-    finally:
-        print("[INFO] Success subscribe youtube")
