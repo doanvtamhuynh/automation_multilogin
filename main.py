@@ -20,46 +20,53 @@ if listProfile is not None:
     profile = listProfile[0]
 #profile = NewProfile("profile_id", "folder_id")
 
+infoAccount = ReadFile.GetInfoAccount()
+
 listWordTranslate = ["hello", "thanks", "good"]
 listWordAlert = ["usa", "car", "football"]
 print(email)
 print(profile)
+print(infoAccount)
 
 driver = MultiLogin.Start(ACCOUNT_USERNAME, ACCOUNT_PASSWORD, profile)
 if driver is not None:
-    #Google Services
-    Google.GG_Login(driver, email)
-    time.sleep(1)
-    Google.GG_Translate(driver, listWordTranslate)
-    time.sleep(1)
-    Google.GG_ALert(driver, listWordAlert)
+
+    resultLogin = Google.GG_Login(driver, email)
     time.sleep(1)
 
-    #Sign In Other Website
-    OtherWebsite.Website_TLDR(driver, email)
-    time.sleep(1)
-    OtherWebsite.Website_Envalior(driver, email)
-    time.sleep(1)
-    OtherWebsite.Website_InfoQ(driver, email)
-    time.sleep(1)
-    OtherWebsite.Website_Dictionary(driver, email)
-    time.sleep(1)
-    OtherWebsite.Website_Quora(driver)
-    time.sleep(1)
-    OtherWebsite.Website_ITViec(driver)
-    time.sleep(1)
-    OtherWebsite.Website_Batdongsan(driver)
-    time.sleep(1)
+    if resultLogin is True:
+        # Google Services
+        Google.Change_Info(driver, infoAccount)
+        Google.GG_Translate(driver, listWordTranslate)
+        time.sleep(1)
+        Google.GG_ALert(driver, listWordAlert)
+        time.sleep(1)
 
-    OtherWebsite.Website_Foxnews(driver, email)
-    time.sleep(1)
+        #Sign In Other Website
+        OtherWebsite.Website_TLDR(driver, email)
+        time.sleep(1)
+        OtherWebsite.Website_Envalior(driver, email)
+        time.sleep(1)
+        OtherWebsite.Website_InfoQ(driver, email)
+        time.sleep(1)
+        OtherWebsite.Website_Dictionary(driver, email)
+        time.sleep(1)
+        OtherWebsite.Website_Quora(driver)
+        time.sleep(1)
+        OtherWebsite.Website_ITViec(driver)
+        time.sleep(1)
+        OtherWebsite.Website_Batdongsan(driver)
+        time.sleep(1)
 
-    #Read Mail
-    Gmail.ReadMail_TLDR(driver)
-    time.sleep(1)
-    Gmail.ReadMail_Envalior(driver)
-    time.sleep(1)
-    Gmail.ReadMail_InfoQ(driver)
+        OtherWebsite.Website_Foxnews(driver, email)
+        time.sleep(1)
 
-    time.sleep(5)
-    MultiLogin.Stop(profile)
+        #Read Mail
+        Gmail.ReadMail_TLDR(driver)
+        time.sleep(1)
+        Gmail.ReadMail_Envalior(driver)
+        time.sleep(1)
+        Gmail.ReadMail_InfoQ(driver)
+
+        time.sleep(5)
+        MultiLogin.Stop(profile)

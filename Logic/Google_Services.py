@@ -8,7 +8,7 @@ from Models.InfoAccount import NewInfo
 import time
 
 
-def GG_Login(driver: webdriver, email: NewEmail):
+def GG_Login(driver: webdriver, email: NewEmail) -> bool:
     try:
         driver.get("https://accounts.google.com/")
 
@@ -47,8 +47,10 @@ def GG_Login(driver: webdriver, email: NewEmail):
 
     except:
         print("[INFO] Error Login Google")
+        return False
     finally:
         print("[INFO] Success Login Google")
+        return True
 
 def Login_Third_Website(driver: webdriver):
     try:
@@ -138,6 +140,17 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo):
         print("[INFO] Error change recovery")
     finally:
         print("[INFO] Success change recovery")
+
+    try:
+        driver.get("https://myaccount.google.com/gender")
+        wait = WebDriverWait(driver, 60)
+        btn_gender = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='radio'])[1]")))
+        time.sleep(2)
+        btn_gender.click()
+    except:
+        print("[INFO] Error change gender")
+    finally:
+        print("[INFO] Success change gender")
 
     try:
         driver.get("https://myaccount.google.com/address/home")
