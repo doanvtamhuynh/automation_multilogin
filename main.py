@@ -21,15 +21,11 @@ if listProfile is not None:
     profile = listProfile[0]
 #profile = NewProfile("profile_id", "folder_id")
 
-newInfoAccount = ReadFile.GetInfoAccount()
-
 listWordTranslate = ["hello", "thanks", "good"]
 listWordAlert = ["usa", "car", "football"]
 
-WriteInfo(email, newInfoAccount, r"G:\Code\ListFile\newEmail.txt")
 print(email)
 print(profile)
-print(newInfoAccount)
 
 driver = MultiLogin.Start(ACCOUNT_USERNAME, ACCOUNT_PASSWORD, profile)
 if driver is not None:
@@ -38,6 +34,11 @@ if driver is not None:
     time.sleep(1)
 
     if resultLogin is True:
+        # Create info
+        newInfoAccount = ReadFile.GetInfoAccount()
+        print(newInfoAccount)
+        WriteInfo(email, newInfoAccount, r"G:\Code\ListFile\newEmail.txt")
+
         # Google Services
         Google.Change_Info(driver, newInfoAccount)
         Google.GG_Translate(driver, listWordTranslate)

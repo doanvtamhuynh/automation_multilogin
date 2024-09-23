@@ -349,3 +349,45 @@ def Website_InfoQ(driver: webdriver, email: NewEmail):
         print("[INFO] Error Website https://infoq.vn/Registers/index")
     finally:
         print("[INFO] Success Website https://infoq.vn/Registers/index")
+
+def Website_Youtube(driver: webdriver):
+    try:
+        array = [
+            "https://www.youtube.com/@bisko.adventure",
+            "https://www.youtube.com/@vtv24",
+            "https://www.youtube.com/@KplusSportsOfficial"
+            ]
+        for link in array:
+            driver.get(link)
+            wait = WebDriverWait(driver, 60)
+            click_subscribe = driver.find_element(By.XPATH, "//yt-subscribe-button-view-model")
+            time.sleep(2)
+            click_subscribe.click()
+            time.sleep(3)
+            wait = WebDriverWait(driver, 60)
+            click_subscribe2 = wait.until(EC.presence_of_element_located((By.XPATH, "//yt-subscribe-button-view-model")))
+            time.sleep(2)
+            click_subscribe2.click()
+            wait = WebDriverWait(driver, 60)
+            click_allNotifi = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='radio-shape-wiz__label']")))
+            time.sleep(2)
+            click_allNotifi.click()
+        driver.get("https://www.youtube.com/account_notifications")
+        wait = WebDriverWait(driver, 60)
+        click_family = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[1]//ytd-settings-switch-renderer//tp-yt-paper-toggle-button")
+        time.sleep(2)
+        click_family.click()
+        wait = WebDriverWait(driver, 60)
+        click_preferences1 = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[1]//tp-yt-paper-toggle-button")
+        time.sleep(2)
+        click_preferences1.click()
+        wait = WebDriverWait(driver, 60)
+        click_preferences2 = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[2]//tp-yt-paper-toggle-button")
+        time.sleep(2)
+        click_preferences2.click()
+        wait = WebDriverWait(driver, 60)
+        click_preferences3 = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[3]//tp-yt-paper-toggle-button")
+        time.sleep(2)
+        click_preferences3.click()
+    except:
+        print("[INFO] Error Website youtube")
