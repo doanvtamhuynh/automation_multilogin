@@ -41,9 +41,14 @@ def ReadMail(driver: webdriver, nameMail: str, href: str):
             driver.get(link)
     except:
         print(f"[INFO] Error read mail {nameMail}")
+    finally:
+        print(f"[INFO] Success read mail {nameMail}")
 
 def ReadMail_TLDR(driver: webdriver):
     ReadMail(driver,"TLDR","https://click.pstmrk.it/3s/tldr.tech")
 
 def ReadMail_Envalior(driver: webdriver):
     ReadMail(driver,"Envalior","https://email.envalior.com")
+
+def ReadMail_InfoQ(driver: webdriver):
+    ReadMail(driver,"infoQ","https://infoq.vn/Registers/redirectIndexm")

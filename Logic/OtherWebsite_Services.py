@@ -3,10 +3,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.select import Select
 from Models.Email import NewEmail
 import time
 import pyautogui
 import Logic.Google_Services as Google
+import random
 
 def Website_TLDR(driver: webdriver, email: NewEmail):
     try:
@@ -19,6 +21,14 @@ def Website_TLDR(driver: webdriver, email: NewEmail):
         click_submit = driver.find_element(By.XPATH, "//button[@type='submit']")
         time.sleep(2)
         click_submit.click()
+
+        try:
+            wait = WebDriverWait(driver, 10)
+            btn_click_here = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='underline']")))
+            time.sleep(1)
+            btn_click_here.click()
+        except:
+            print("")
 
         wait = WebDriverWait(driver, 60)
         btn_save1 = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
@@ -47,6 +57,8 @@ def Website_TLDR(driver: webdriver, email: NewEmail):
 
     except:
         print("[INFO] Error Website https://tldr.tech/")
+    finally:
+        print("[INFO] Success Website https://tldr.tech/")
 
 def Website_Envalior(driver: webdriver, email: NewEmail):
     try:
@@ -69,6 +81,8 @@ def Website_Envalior(driver: webdriver, email: NewEmail):
             btn_submit.click()
     except:
         print("[INFO] Error Website https://www.envalior.com/")
+    finally:
+        print("[INFO] Success Website https://www.envalior.com/")
 
 def Website_Foxnews(driver: webdriver, email: NewEmail):
     try:
@@ -118,6 +132,8 @@ def Website_Foxnews(driver: webdriver, email: NewEmail):
         driver.send_keys(Keys.ENTER)
     except:
         print("[INFO] Error Website https://www.foxnews.com/newsletters")
+    finally:
+        print("[INFO] Success Website https://www.foxnews.com/newsletters")
 
 def Website_Batdongsan(driver: webdriver):
     try:
@@ -155,6 +171,8 @@ def Website_Batdongsan(driver: webdriver):
         btn_Submit.click()
     except:
         print("[INFO] Error Website Bat Dong San")
+    finally:
+        print("[INFO] Success Website Bat Dong San")
 
 def Website_Dictionary(driver: webdriver, email: NewEmail):
     try:
@@ -170,6 +188,8 @@ def Website_Dictionary(driver: webdriver, email: NewEmail):
         btn_submit.click()
     except:
         print("[INFO] Error Website Dictionary")
+    finally:
+        print("[INFO] Success Website Dictionary")
 
 def Website_ITViec(driver: webdriver):
     try:
@@ -202,6 +222,8 @@ def Website_ITViec(driver: webdriver):
         btn_Subcribe.click()
     except:
         print("[INFO] Error website ITViec")
+    finally:
+        print("[INFO] Success website ITViec")
 
 def Website_Quora(driver: webdriver):
     try:
@@ -249,3 +271,72 @@ def Website_Quora(driver: webdriver):
 
     except:
         print("[INFO] Error website Quora")
+    finally:
+        print("[INFO] Success website Quora")
+
+def Website_InfoQ(driver: webdriver, email: NewEmail):
+    try:
+        driver.get("https://infoq.vn/Registers/index")
+        wait = WebDriverWait(driver, 60)
+        input_surname = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='first_name']")))
+        time.sleep(2)
+        input_surname.send_keys("Harry")
+        wait = WebDriverWait(driver, 60)
+        input_lastname = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='last_name']")))
+        input_lastname.send_keys("Potter")
+        wait = WebDriverWait(driver, 60)
+        input_email1 = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='email01']")))
+        input_email1.send_keys(email.email)
+        wait = WebDriverWait(driver, 60)
+        input_email2 = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='email02']")))
+        input_email2.send_keys(email.email)
+        wait = WebDriverWait(driver, 60)
+        input_password1 = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='pass01']")))
+        input_password1.send_keys("Duchanh456@")
+        wait = WebDriverWait(driver, 60)
+        input_password2 = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='pass02']")))
+        input_password2.send_keys("Duchanh456@")
+        random_number = random.randint(10000000, 99999999)
+        phone_number = f"09{random_number}"
+        wait = WebDriverWait(driver, 60)
+        input_phonenumber = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='phone_num1']")))
+        input_phonenumber.send_keys(phone_number)
+        wait = WebDriverWait(driver, 60)
+        input_birth = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='birthday']")))
+        input_birth.send_keys("14/03/1999")
+        wait = WebDriverWait(driver, 60)
+        click_gender = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@id='gt_1']")))
+        click_gender.click()
+        wait = WebDriverWait(driver, 60)
+        dropdown_province = wait.until(EC.presence_of_element_located((By.XPATH, "//select[@name='city_cd']")))
+        select_province = Select(dropdown_province)
+        select_province.select_by_value("56")
+        wait = WebDriverWait(driver, 60)
+        input_district = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='district']")))
+        input_district.send_keys("abc")
+        wait = WebDriverWait(driver, 60)
+        input_village = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='village']")))
+        input_village.send_keys("abc")
+        wait = WebDriverWait(driver, 60)
+        input_address = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='address']")))
+        input_address.send_keys("abc")
+        wait = WebDriverWait(driver, 60)
+        dropdown_question = wait.until(EC.presence_of_element_located((By.XPATH, "//select[@name='secret_question_cd']")))
+        select_question = Select(dropdown_question)
+        select_question.select_by_value("02")
+        wait = WebDriverWait(driver, 60)
+        input_question = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='secret_question_value']")))
+        input_question.send_keys("abc")
+        wait = WebDriverWait(driver, 60)
+        click_check = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='ag_chk']")))
+        click_check.click()
+        wait = WebDriverWait(driver, 60)
+        click_submit = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
+        click_submit.click()
+        wait = WebDriverWait(driver, 60)
+        click_submitForm = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit' and contains(@onclick,'submitForm')]")))
+        click_submitForm.click()
+    except:
+        print("[INFO] Error Website https://infoq.vn/Registers/index")
+    finally:
+        print("[INFO] Success Website https://infoq.vn/Registers/index")

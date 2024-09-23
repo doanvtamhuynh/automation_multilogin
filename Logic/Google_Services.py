@@ -22,12 +22,12 @@ def GG_Login(driver: webdriver, email: NewEmail):
         input_password.send_keys(Keys.ENTER)
 
         try:
-            wait = WebDriverWait(driver, 20)
+            wait = WebDriverWait(driver, 10)
             click_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//ul[@class='Dl08I']//li[3]")))
             time.sleep(2)
             click_recovery.click()
 
-            wait = WebDriverWait(driver, 20)
+            wait = WebDriverWait(driver, 10)
             input_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
             time.sleep(2)
             input_recovery.send_keys(email.recovery)
@@ -45,6 +45,8 @@ def GG_Login(driver: webdriver, email: NewEmail):
 
     except:
         print("[INFO] Error Login Google")
+    finally:
+        print("[INFO] Success Login Google")
 
 def Login_Third_Website(driver: webdriver):
     try:
@@ -67,7 +69,7 @@ def GG_Translate(driver: webdriver, wordList: list):
             try:
                 driver.get('https://translate.google.com/')
                 wait = WebDriverWait(driver, 60)
-                input_word = wait.until(EC.presence_of_element_located((By.XPATH, "(//div[@class='n4sEPd']//c-wiz)[1]")))
+                input_word = wait.until(EC.presence_of_element_located((By.XPATH, "//textarea")))
                 time.sleep(2)
                 input_word.send_keys(word)
                 time.sleep(3)
@@ -75,6 +77,8 @@ def GG_Translate(driver: webdriver, wordList: list):
                 continue
     except:
         print("[INFO] Error GG Translate")
+    finally:
+        print("[INFO] Success GG Translate")
 
 def GG_ALert(driver: webdriver, wordList: list):
     try:
@@ -95,4 +99,6 @@ def GG_ALert(driver: webdriver, wordList: list):
                 continue
     except:
         print("[INFO] Error GG Alert")
+    finally:
+        print("[INFO] Success GG GG Alert")
 
