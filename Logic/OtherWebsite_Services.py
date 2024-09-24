@@ -9,6 +9,7 @@ import time
 import pyautogui
 import Logic.Google_Services as Google
 import random
+from selenium.webdriver.common.action_chains import ActionChains
 
 def Website_TLDR(driver: webdriver, email: NewEmail):
     try:
@@ -95,43 +96,46 @@ def Website_Foxnews(driver: webdriver, email: NewEmail):
         time.sleep(2)
         btn_subcribe.click()
         time.sleep(2)
-        driver.send_keys(Keys.TAB)
+
+        actions = ActionChains(driver)
+
+        actions.send_keys(Keys.TAB).perform()
         time.sleep(1)
         pyautogui.typewrite(email.email)
         time.sleep(1)
-        driver.send_keys(Keys.TAB)
+        actions.send_keys(Keys.TAB).perform()
         time.sleep(1)
-        driver.send_keys(Keys.ENTER)
+        actions.send_keys(Keys.RETURN).perform()
         time.sleep(5)
 
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.ENTER)
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.RETURN).perform()
         time.sleep(2)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.ENTER)
-        time.sleep(2)
-
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.ENTER)
-        time.sleep(2)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.ENTER)
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.RETURN).perform()
         time.sleep(2)
 
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.ENTER)
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.RETURN).perform()
         time.sleep(2)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.TAB)
-        driver.send_keys(Keys.ENTER)
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.RETURN).perform()
+        time.sleep(2)
+
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.RETURN).perform()
+        time.sleep(2)
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.RETURN).perform()
         print("[INFO] Success Website https://www.foxnews.com/newsletters")
     except:
         print("[INFO] Error Website https://www.foxnews.com/newsletters")

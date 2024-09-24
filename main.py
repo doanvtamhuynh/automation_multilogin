@@ -7,11 +7,13 @@ import Logic.OtherWebsite_Services as OtherWebsite
 import Logic.ReadFile as ReadFile
 import Logic.Gmail_Services as Gmail
 from Logic.WriteFile import WriteInfo
+import os
 
 ACCOUNT_USERNAME = "username"
 ACCOUNT_PASSWORD = "password"
 
-src = r"G:\Code\Automation_MultiLogin\ListFile"
+root_dir = os.getcwd()
+src = rf"{root_dir}\ListFile"
 
 listEmail = ReadFile.GetListEmail(rf"{src}\listEmail.txt")
 if listEmail is not None:

@@ -2,8 +2,9 @@ from Models.ProfileMultiLogin import NewProfile as Profile
 from Models.Email import NewEmail as Email
 from Models.InfoAccount import NewInfo as Info
 import random
+from main import root_dir
 
-src = r"G:\Code\Automation_MultiLogin\ListFile"
+src = rf"{root_dir}\ListFile"
 
 
 def GetListEmail(src: str) -> list:
