@@ -36,13 +36,6 @@ if driver is not None:
     time.sleep(1)
 
     if resultLogin is True:
-        # Create info
-        newInfoAccount = ReadFile.GetInfoAccount()
-        print(newInfoAccount)
-
-        # Google Services
-        Google.Change_Info(driver, newInfoAccount)
-        WriteInfo(email, newInfoAccount, rf"{src}\newEmail.txt")
 
         Google.GG_Translate(driver, listWordTranslate)
         time.sleep(2)
@@ -64,8 +57,6 @@ if driver is not None:
         time.sleep(2)
         OtherWebsite.Website_ITViec(driver)
         time.sleep(2)
-        OtherWebsite.Website_Batdongsan(driver)
-        time.sleep(2)
         OtherWebsite.Website_Foxnews(driver, email)
         time.sleep(2)
 
@@ -75,6 +66,17 @@ if driver is not None:
         Gmail.ReadMail_Envalior(driver)
         time.sleep(2)
         Gmail.ReadMail_InfoQ(driver)
+
+        OtherWebsite.Website_Batdongsan(driver)
+        time.sleep(2)
+
+        # Create info
+        newInfoAccount = ReadFile.GetInfoAccount()
+        print(newInfoAccount)
+
+        # Google Services
+        Google.Change_Info(driver, newInfoAccount)
+        WriteInfo(email, newInfoAccount, rf"{src}\newEmail.txt")
 
     time.sleep(5)
     MultiLogin.Stop(profile)

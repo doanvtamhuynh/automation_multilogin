@@ -83,6 +83,7 @@ def Website_Envalior(driver: webdriver, email: NewEmail):
             btn_submit = driver.find_element(By.XPATH, "//button[@type='submit']")
             time.sleep(2)
             driver.execute_script("arguments[0].click();", btn_submit)
+        time.sleep(10)
         print("[INFO] Success Website https://www.envalior.com/")
     except:
         print("[INFO] Error Website https://www.envalior.com/")
@@ -161,24 +162,27 @@ def Website_Batdongsan(driver: webdriver):
                     time.sleep(2)
                     result_signin = Google.Login_Third_Website(driver)
                     time.sleep(2)
-                    driver.close()
                     break
             driver.switch_to.window(main_window)
         except:
             print("[INFO] Error Login with Google")
 
+        time.sleep(10)
         if result_signin is True:
             driver.get("https://batdongsan.com.vn/nha-dat-ban-ha-noi")
             wait = WebDriverWait(driver, 60)
-            btn_bell = wait.until(EC.presence_of_element_located((By.XPATH, "//a[@class='re__btn re__btn-icon--lg re__icon-switch-save-alert js__switch-save-alert-v3']")))
+            btn_bell = wait.until(EC.presence_of_element_located((By.XPATH, "//i[@class='re__icon-switch-off--lg js__save-alert-v3-switch-icon']/span")))
             time.sleep(2)
-            btn_bell.click()
+            driver.execute_script("arguments[0].click();", btn_bell)
 
+            time.sleep(10)
             wait = WebDriverWait(driver, 60)
             btn_Submit = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@tracking-id='click-save-search-alert-option1']")))
             time.sleep(2)
-            btn_Submit.click()
-        print("[INFO] Success Website Bat Dong San")
+            driver.execute_script("arguments[0].click();", btn_Submit)
+            print("[INFO] Success Website Bat Dong San")
+        else:
+            print("[INFO] Error Website Bat Dong San")
     except:
         print("[INFO] Error Website Bat Dong San")
 
@@ -242,12 +246,12 @@ def Website_Quora(driver: webdriver):
         wait = WebDriverWait(driver, 60)
         btn_SignIn = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class, 'qu-ml--medium')]")))
         time.sleep(2)
-        btn_SignIn.click()
+        driver.execute_script("arguments[0].click();", btn_SignIn)
 
         wait = WebDriverWait(driver, 60)
         btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'puppeteer_test_login_button_google')]")))
         time.sleep(2)
-        btn_Continue.click()
+        driver.execute_script("arguments[0].click();", btn_Continue)
         result_signin = Google.Login_Third_Website(driver)
         time.sleep(2)
 
@@ -255,12 +259,12 @@ def Website_Quora(driver: webdriver):
             wait = WebDriverWait(driver, 60)
             btn_Follow = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class,'qu-bg--tribe_theme_blue')]")))
             time.sleep(2)
-            btn_Follow.click()
+            driver.execute_script("arguments[0].click();", btn_Follow)
 
             wait = WebDriverWait(driver, 60)
             btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "id('notitifications')")))
             time.sleep(2)
-            btn_Bell.click()
+            driver.execute_script("arguments[0].click();", btn_Bell)
 
             try:
                 wait = WebDriverWait(driver, 60)

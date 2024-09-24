@@ -57,7 +57,7 @@ def GetInfoAccount() -> Info:
             listPass = file.readlines()
         index = random.randint(0, len(listPass) - 1)
         password = listPass[index]
-        password.replace("\n","")
+        password = password.replace("\n","")
     except:
         print("[INFO] File Password empty")
         password = "duchanh456"
@@ -67,7 +67,7 @@ def GetInfoAccount() -> Info:
             listRecovery = file.readlines()
         index = random.randint(0, len(listRecovery) - 1)
         recovery = listRecovery[index]
-        recovery.replace("\n", "")
+        recovery = recovery.replace("\n", "")
     except:
         print("[INFO] File Recovery empty")
         recovery = "milleroainum@gmail.com"
@@ -77,7 +77,7 @@ def GetInfoAccount() -> Info:
             listHo = file.readlines()
         index = random.randint(0, len(listHo) - 1)
         ho = listHo[index]
-        ho.replace("\n", "")
+        ho = ho.replace("\n", "")
     except:
         print("[INFO] File Ho empty")
         ho = "Nguyen"
@@ -87,7 +87,7 @@ def GetInfoAccount() -> Info:
             listTen = file.readlines()
         index = random.randint(0, len(listTen) - 1)
         ten = listTen[index]
-        ten.replace("\n", "")
+        ten = ten.replace("\n", "")
     except:
         print("[INFO] File Ten empty")
         ten = "Nhi"
@@ -97,9 +97,9 @@ def GetInfoAccount() -> Info:
             listDiachi = file.readlines()
         index = random.randint(2, len(listDiachi) - 2)
         homeAddress = listDiachi[index]
-        homeAddress.replace("\n", "")
+        homeAddress = homeAddress.replace("\n", "")
         workAddress = listDiachi[index + 1]
-        workAddress.replace("\n", "")
+        workAddress = workAddress.replace("\n", "")
     except:
         print("[INFO] File Dia chi empty")
         homeAddress = "32, Đường Nguyễn Khắc Viện, Quận 9, TP. Hồ Chí Minh"
