@@ -2,10 +2,10 @@ from Models.ProfileMultiLogin import NewProfile as Profile
 from Models.Email import NewEmail as Email
 from Models.InfoAccount import NewInfo as Info
 import random
-from main import root_dir
+import os
 
+root_dir = os.getcwd()
 src = rf"{root_dir}\ListFile"
-
 
 def GetListEmail(src: str) -> list:
     result = False
@@ -107,3 +107,4 @@ def GetInfoAccount() -> Info:
 
     newInfo = Info(password, recovery, ten, ho, homeAddress, workAddress)
     return newInfo
+

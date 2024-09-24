@@ -6,7 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 from Models.Email import NewEmail
 import time
-import pyautogui
 import Logic.Google_Services as Google
 import random
 from selenium.webdriver.common.action_chains import ActionChains
@@ -72,17 +71,18 @@ def Website_Envalior(driver: webdriver, email: NewEmail):
         input_email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='email']")))
         time.sleep(2)
         input_email.send_keys(email.email)
+
         btn_checkbox = driver.find_element(By.XPATH, "//input[@type='checkbox']")
-        time.sleep(2)
-        btn_checkbox.click()
+        driver.execute_script("arguments[0].click();", btn_checkbox)
+
         try:
             btn_submit = driver.find_element(By.XPATH, "//button[@type='SUBMIT']")
             time.sleep(2)
-            btn_submit.click()
+            driver.execute_script("arguments[0].click();", btn_submit)
         except:
             btn_submit = driver.find_element(By.XPATH, "//button[@type='submit']")
             time.sleep(2)
-            btn_submit.click()
+            driver.execute_script("arguments[0].click();", btn_submit)
         print("[INFO] Success Website https://www.envalior.com/")
     except:
         print("[INFO] Error Website https://www.envalior.com/")
@@ -101,7 +101,10 @@ def Website_Foxnews(driver: webdriver, email: NewEmail):
 
         actions.send_keys(Keys.TAB).perform()
         time.sleep(1)
-        pyautogui.typewrite(email.email)
+        wait = WebDriverWait(driver, 60)
+        input_question = wait.until(
+            EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
+        input_question.send_keys(email.email)
         time.sleep(1)
         actions.send_keys(Keys.TAB).perform()
         time.sleep(1)
@@ -213,20 +216,20 @@ def Website_ITViec(driver: webdriver):
             btn_Next.click()
 
             wait = WebDriverWait(driver, 30)
-            btn_Select_Java = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='checkbox'])[1]")))
+            btn_Select_Java = wait.until(EC.presence_of_element_located((By.XPATH, "//label[@for='skill_java']")))
             time.sleep(2)
-            btn_Select_Java.click()
-            btn_Select_ReactJs = driver.find_element(By.XPATH, "(//input[@type='checkbox'])[2]")
-            btn_Select_ReactJs.click()
-            btn_Select_DotNet = driver.find_element(By.XPATH, "(//input[@type='checkbox'])[3]")
-            btn_Select_DotNet.click()
-            btn_Select_HCM = driver.find_element(By.XPATH, "(//input[@type='radio'])[1]")
-            btn_Select_HCM.click()
+            driver.execute_script("arguments[0].click();", btn_Select_Java)
+            btn_Select_ReactJs = driver.find_element(By.XPATH, "//label[@for='skill_reactjs']")
+            driver.execute_script("arguments[0].click();", btn_Select_ReactJs)
+            btn_Select_DotNet = driver.find_element(By.XPATH, "//label[@for='skill_net']")
+            driver.execute_script("arguments[0].click();", btn_Select_DotNet)
+            btn_Select_HCM = driver.find_element(By.XPATH, "//label[@for='city_ho-chi-minh-hcm']")
+            driver.execute_script("arguments[0].click();", btn_Select_HCM)
 
             wait = WebDriverWait(driver, 30)
-            btn_Subcribe = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@data-jr-onboarding-target='buttonSubmit'])")))
+            btn_Subcribe = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@data-jr-onboarding-target='buttonSubmit']")))
             time.sleep(2)
-            btn_Subcribe.click()
+            driver.execute_script("arguments[0].click();", btn_Subcribe)
         print("[INFO] Success website ITViec")
     except:
         print("[INFO] Error website ITViec")
@@ -237,45 +240,49 @@ def Website_Quora(driver: webdriver):
         driver.get("https://humanity.quora.com")
 
         wait = WebDriverWait(driver, 60)
-        btn_SignIn = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[3]")))
+        btn_SignIn = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class, 'qu-ml--medium')]")))
         time.sleep(2)
         btn_SignIn.click()
 
         wait = WebDriverWait(driver, 60)
-        btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "(//span[@class='c13dhsxm'])[1]")))
+        btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'puppeteer_test_login_button_google')]")))
         time.sleep(2)
         btn_Continue.click()
         result_signin = Google.Login_Third_Website(driver)
         time.sleep(2)
 
         if result_signin is True:
-            driver.get("https://humanity.quora.com")
             wait = WebDriverWait(driver, 60)
-            btn_Follow = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[6]")))
+            btn_Follow = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class,'qu-bg--tribe_theme_blue')]")))
             time.sleep(2)
             btn_Follow.click()
 
             wait = WebDriverWait(driver, 60)
-            btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@role='button'])[8]")))
+            btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "id('notitifications')")))
             time.sleep(2)
             btn_Bell.click()
 
-            wait = WebDriverWait(driver, 60)
-            checkbox_AllPost = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='radio'])[1]")))
-            time.sleep(2)
-            checkbox_AllPost.click()
+            try:
+                wait = WebDriverWait(driver, 60)
+                checkbox_AllPost = wait.until(
+                    EC.presence_of_element_located((By.XPATH, "//input[@value='all_notifs']")))
+                driver.execute_script("arguments[0].click();", checkbox_AllPost)
+            except:
+                None
 
-            btn_Email = driver.find_element(By.XPATH, "(//input[@type='checkbox'])[2]")
-            attribute_value_btn_Email = btn_Email.get_attribute("aria-checked")
-            time.sleep(2)
-            if attribute_value_btn_Email == "false":
-                btn_Email.click()
+            try:
+                wait = WebDriverWait(driver, 60)
+                btn_Email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@aria-checked='false' and @type='checkbox']")))
+                driver.execute_script("arguments[0].click();", btn_Email)
+            except:
+                None
 
             driver.get("https://www.quora.com/settings/notifications")
             wait = WebDriverWait(driver, 60)
-            btn_Daily = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='radio'])[2]")))
-            time.sleep(2)
-            btn_Daily.click()
+            btn_Daily = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='NotifSettingsRadioButtonsItem' and @value='2']")))
+            driver.execute_script("arguments[0].scrollIntoView(true);", btn_Daily)
+            driver.execute_script("arguments[0].click();", btn_Daily)
+
         print("[INFO] Success website Quora")
     except:
         print("[INFO] Error website Quora")
