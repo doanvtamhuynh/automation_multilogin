@@ -108,3 +108,25 @@ def GetInfoAccount() -> Info:
     newInfo = Info(password, recovery, ten, ho, homeAddress, workAddress)
     return newInfo
 
+def GetUsernamePassword() -> list:
+    result = False
+    try:
+        with open(rf"{src}\username_password.txt", 'r') as file:
+            lines = file.readlines()
+        if lines is not None:
+            result = True
+        else:
+            print("[INFO] File Username and Password empty")
+    except:
+        print("[INFO] Cannot read file Email")
+        result = False
+
+    if result is True:
+        lines[0].strip()
+        detail_Line = lines[0].split("|")
+        listUsernamePassword = [detail_Line[0], detail_Line[1]]
+        return listUsernamePassword
+    else:
+        return None
+
+

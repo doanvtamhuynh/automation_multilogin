@@ -9,8 +9,12 @@ import Logic.Gmail_Services as Gmail
 from Logic.WriteFile import WriteInfo
 import os
 
-ACCOUNT_USERNAME = "username"
-ACCOUNT_PASSWORD = "password"
+ACCOUNT = ReadFile.GetUsernamePassword()
+ACCOUNT_USERNAME = ACCOUNT[0]
+ACCOUNT_PASSWORD = ACCOUNT[1]
+
+print(ACCOUNT_PASSWORD)
+print(ACCOUNT_USERNAME)
 
 root_dir = os.getcwd()
 src = rf"{root_dir}\ListFile"
