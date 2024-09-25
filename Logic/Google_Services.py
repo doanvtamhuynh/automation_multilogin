@@ -245,23 +245,27 @@ def Logout_Devices(driver: webdriver):
 
             wait = WebDriverWait(driver, 60)
             check_loadpage = wait.until(
-                EC.presence_of_element_located((By.XPATH, "//li[@class='K6ZZTd iUwXVd bs2km t7ce4c'][1]")))
+                EC.presence_of_element_located((By.XPATH, '//div[@class="X7Lyee"]/div[1]//ul[@class="u7hyyf"]/li[2]')))
             if check_loadpage:
                 try:
                     wait = WebDriverWait(driver, 10)
                     check_logout = wait.until(
                         EC.presence_of_element_located(
-                            (By.XPATH, "//li[@class='K6ZZTd iUwXVd bs2km t7ce4c'][2]//p[@class='BXHFQ']")))
+                            (By.XPATH, '//div[@class="X7Lyee"]/div[1]//ul[@class="u7hyyf"]/li[2]//p')))
                     if check_logout:
                         break
                 except:
                     try:
                         wait = WebDriverWait(driver, 10)
                         click_logout = wait.until(
-                            EC.presence_of_element_located((By.XPATH, "//li[@class='K6ZZTd iUwXVd bs2km t7ce4c'][2]")))
+                            EC.presence_of_element_located((By.XPATH, '//div[@class="X7Lyee"]/div[1]//ul[@class="u7hyyf"]/li[2]')))
                         time.sleep(2)
-                        driver.execute_script("arguments[0].click();", click_logout)
+                        try:
+                            click_logout.click()
+                        except:
+                            driver.execute_script("arguments[0].click();", click_logout)
 
+                        time.sleep(5)
                         wait = WebDriverWait(driver, 60)
                         check_btn_logout = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='etzm7d']")))
 
@@ -274,9 +278,10 @@ def Logout_Devices(driver: webdriver):
                         time.sleep(3)
                     except:
                         break
+            else:
+                break
     except:
         None
     finally:
-        driver.get("https://accounts.google.com/Logout")
         time.sleep(5)
         print("[INFO] Success logout")
