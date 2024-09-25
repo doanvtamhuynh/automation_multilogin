@@ -243,18 +243,18 @@ def Website_Quora(driver: webdriver):
     try:
         driver.get("https://humanity.quora.com")
 
-        # wait = WebDriverWait(driver, 60)
-        # btn_SignIn = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class, 'qu-ml--medium')]")))
-        # time.sleep(2)
-        # driver.execute_script("arguments[0].click();", btn_SignIn)
-        #
-        # wait = WebDriverWait(driver, 60)
-        # btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'puppeteer_test_login_button_google')]")))
-        # time.sleep(2)
-        # driver.execute_script("arguments[0].click();", btn_Continue)
-        #result_signin = Google.Login_Third_Website(driver)
+        wait = WebDriverWait(driver, 60)
+        btn_SignIn = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class, 'qu-ml--medium')]")))
         time.sleep(2)
-        result_signin = True
+        driver.execute_script("arguments[0].click();", btn_SignIn)
+
+        wait = WebDriverWait(driver, 60)
+        btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'puppeteer_test_login_button_google')]")))
+        time.sleep(2)
+        driver.execute_script("arguments[0].click();", btn_Continue)
+        result_signin = Google.Login_Third_Website(driver)
+        time.sleep(2)
+
         if result_signin is True:
             try:
                 wait = WebDriverWait(driver, 60)
