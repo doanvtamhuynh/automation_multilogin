@@ -82,5 +82,8 @@ if driver is not None:
         Google.Change_Info(driver, newInfoAccount)
         WriteInfo(email, newInfoAccount, rf"{src}\newEmail.txt")
 
+        #Log out
+        Google.Logout_Devices(driver)
     time.sleep(5)
-    MultiLogin.Stop(profile)
+    if driver:
+        MultiLogin.Stop(profile)
