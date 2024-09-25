@@ -23,7 +23,7 @@ def GetListEmail(src: str) -> list:
 
     if result is True:
         for line in lines:
-            line.strip()
+            line = line.strip()
             detail_Line = line.split("|")
             new_Email = Email(detail_Line[0],detail_Line[1],detail_Line[2])
             listEmail.append(new_Email)
@@ -45,7 +45,7 @@ def GetListProfile(src: str) -> list:
 
     if result is True:
         for line in lines:
-            line.strip()
+            line = line.strip()
             detail_Line = line.split("|")
             new_Profile = Profile(detail_Line[0],detail_Line[1])
             listProfile.append(new_Profile)
@@ -122,7 +122,7 @@ def GetUsernamePassword() -> list:
         result = False
 
     if result is True:
-        lines[0].strip()
+        lines[0] = lines[0].strip()
         detail_Line = lines[0].split("|")
         listUsernamePassword = [detail_Line[0], detail_Line[1]]
         return listUsernamePassword

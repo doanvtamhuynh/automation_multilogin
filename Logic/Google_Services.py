@@ -265,17 +265,20 @@ def Logout_Devices(driver: webdriver):
                         except:
                             driver.execute_script("arguments[0].click();", click_logout)
 
-                        time.sleep(5)
-                        wait = WebDriverWait(driver, 60)
-                        check_btn_logout = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='etzm7d']")))
+                        try:
+                            time.sleep(5)
+                            wait = WebDriverWait(driver, 60)
+                            check_btn_logout = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='etzm7d']")))
 
-                        actions = ActionChains(driver)
-                        actions.send_keys(Keys.TAB).perform()
-                        actions.send_keys(Keys.RETURN).perform()
-                        time.sleep(5)
-                        actions.send_keys(Keys.TAB).perform()
-                        actions.send_keys(Keys.RETURN).perform()
-                        time.sleep(3)
+                            actions = ActionChains(driver)
+                            actions.send_keys(Keys.TAB).perform()
+                            actions.send_keys(Keys.RETURN).perform()
+                            time.sleep(5)
+                            actions.send_keys(Keys.TAB).perform()
+                            actions.send_keys(Keys.RETURN).perform()
+                            time.sleep(3)
+                        except:
+                            None
                     except:
                         break
             else:

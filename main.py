@@ -36,52 +36,51 @@ print(profile)
 driver = MultiLogin.Start(ACCOUNT_USERNAME, ACCOUNT_PASSWORD, profile)
 if driver is not None:
 
-    # resultLogin = Google.GG_Login(driver, email)
-    # time.sleep(1)
-    resultLogin = True
+    resultLogin = Google.GG_Login(driver, email)
+    time.sleep(1)
 
     if resultLogin is True:
 
-        # Google.GG_Translate(driver, listWordTranslate)
-        # time.sleep(2)
-        # Google.GG_ALert(driver, listWordAlert)
-        # time.sleep(2)
-        #
-        # #Sign In Other Website
-        # OtherWebsite.Website_Youtube(driver)
-        # time.sleep(2)
-        # OtherWebsite.Website_TLDR(driver, email)
-        # time.sleep(2)
-        # OtherWebsite.Website_Envalior(driver, email)
-        # time.sleep(2)
-        # OtherWebsite.Website_InfoQ(driver, email)
-        # time.sleep(2)
-        # OtherWebsite.Website_Dictionary(driver, email)
-        # time.sleep(2)
-        # OtherWebsite.Website_Quora(driver)
-        # time.sleep(2)
-        # OtherWebsite.Website_ITViec(driver)
-        # time.sleep(2)
-        # OtherWebsite.Website_Foxnews(driver, email)
-        # time.sleep(2)
-        #
-        # #Read Mail
-        # Gmail.ReadMail_TLDR(driver)
-        # time.sleep(2)
-        # Gmail.ReadMail_Envalior(driver)
-        # time.sleep(2)
-        # Gmail.ReadMail_InfoQ(driver)
-        #
-        # OtherWebsite.Website_Batdongsan(driver)
-        # time.sleep(2)
-        #
-        # # Create info
-        # newInfoAccount = ReadFile.GetInfoAccount()
-        # print(newInfoAccount)
-        #
-        # # Google Services
-        # Google.Change_Info(driver, newInfoAccount)
-        # WriteInfo(email, newInfoAccount, rf"{src}\newEmail.txt")
+        Google.GG_Translate(driver, listWordTranslate)
+        time.sleep(2)
+        Google.GG_ALert(driver, listWordAlert)
+        time.sleep(2)
+
+        #Sign In Other Website
+        OtherWebsite.Website_Youtube(driver)
+        time.sleep(2)
+        OtherWebsite.Website_TLDR(driver, email)
+        time.sleep(2)
+        OtherWebsite.Website_Envalior(driver, email)
+        time.sleep(2)
+        OtherWebsite.Website_InfoQ(driver, email)
+        time.sleep(2)
+        OtherWebsite.Website_Dictionary(driver, email)
+        time.sleep(2)
+        OtherWebsite.Website_Quora(driver)
+        time.sleep(2)
+        OtherWebsite.Website_ITViec(driver)
+        time.sleep(2)
+        OtherWebsite.Website_Foxnews(driver, email)
+        time.sleep(2)
+
+        #Read Mail
+        Gmail.ReadMail_TLDR(driver)
+        time.sleep(2)
+        Gmail.ReadMail_Envalior(driver)
+        time.sleep(2)
+        Gmail.ReadMail_InfoQ(driver)
+
+        OtherWebsite.Website_Batdongsan(driver)
+        time.sleep(2)
+
+        # Create info
+        newInfoAccount = ReadFile.GetInfoAccount()
+        print(newInfoAccount)
+
+        # Google Services
+        Google.Change_Info(driver, newInfoAccount)
+        WriteInfo(email, newInfoAccount, rf"{src}\newEmail.txt")
 
         #Log out
         Google.Logout_Devices(driver)
