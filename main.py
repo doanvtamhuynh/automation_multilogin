@@ -82,8 +82,12 @@ async def task(email: NewEmail, profile: NewProfile):
             Google.Change_Info(driver, newInfoAccount)
             WriteInfo(email, newInfoAccount, rf"{src}\newEmail.txt")
 
-        await asyncio.sleep(5)
-        MultiLogin.Stop(profile)
+            #Log out
+            Google.Logout_Devices(driver)
+
+        if driver:
+            await asyncio.sleep(5)
+            MultiLogin.Stop(profile)
 
 
 async def main():

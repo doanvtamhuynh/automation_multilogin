@@ -237,3 +237,54 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo):
         print("[INFO] Success change password")
     except:
         print("[INFO] Error change password")
+
+def Logout_Devices(driver: webdriver):
+    try:
+        while True:
+            driver.get("https://myaccount.google.com/device-activity")
+
+            wait = WebDriverWait(driver, 60)
+            check_loadpage = wait.until(
+                EC.presence_of_element_located((By.XPATH, '//div[@class="X7Lyee"]/div[1]//ul[@class="u7hyyf"]/li[2]')))
+            if check_loadpage:
+                try:
+                    wait = WebDriverWait(driver, 10)
+                    check_logout = wait.until(
+                        EC.presence_of_element_located(
+                            (By.XPATH, '//div[@class="X7Lyee"]/div[1]//ul[@class="u7hyyf"]/li[2]//p')))
+                    if check_logout:
+                        break
+                except:
+                    try:
+                        wait = WebDriverWait(driver, 10)
+                        click_logout = wait.until(
+                            EC.presence_of_element_located((By.XPATH, '//div[@class="X7Lyee"]/div[1]//ul[@class="u7hyyf"]/li[2]')))
+                        time.sleep(2)
+                        try:
+                            click_logout.click()
+                        except:
+                            driver.execute_script("arguments[0].click();", click_logout)
+
+                        try:
+                            time.sleep(5)
+                            wait = WebDriverWait(driver, 60)
+                            check_btn_logout = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='etzm7d']")))
+
+                            actions = ActionChains(driver)
+                            actions.send_keys(Keys.TAB).perform()
+                            actions.send_keys(Keys.RETURN).perform()
+                            time.sleep(5)
+                            actions.send_keys(Keys.TAB).perform()
+                            actions.send_keys(Keys.RETURN).perform()
+                            time.sleep(3)
+                        except:
+                            None
+                    except:
+                        break
+            else:
+                break
+    except:
+        None
+    finally:
+        time.sleep(5)
+        print("[INFO] Success logout")
