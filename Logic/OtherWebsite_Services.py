@@ -243,41 +243,50 @@ def Website_Quora(driver: webdriver):
     try:
         driver.get("https://humanity.quora.com")
 
-        wait = WebDriverWait(driver, 60)
-        btn_SignIn = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class, 'qu-ml--medium')]")))
+        # wait = WebDriverWait(driver, 60)
+        # btn_SignIn = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class, 'qu-ml--medium')]")))
+        # time.sleep(2)
+        # driver.execute_script("arguments[0].click();", btn_SignIn)
+        #
+        # wait = WebDriverWait(driver, 60)
+        # btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'puppeteer_test_login_button_google')]")))
+        # time.sleep(2)
+        # driver.execute_script("arguments[0].click();", btn_Continue)
+        #result_signin = Google.Login_Third_Website(driver)
         time.sleep(2)
-        driver.execute_script("arguments[0].click();", btn_SignIn)
-
-        wait = WebDriverWait(driver, 60)
-        btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'puppeteer_test_login_button_google')]")))
-        time.sleep(2)
-        driver.execute_script("arguments[0].click();", btn_Continue)
-        result_signin = Google.Login_Third_Website(driver)
-        time.sleep(2)
-
+        result_signin = True
         if result_signin is True:
-            wait = WebDriverWait(driver, 60)
-            btn_Follow = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class,'qu-bg--tribe_theme_blue')]")))
-            time.sleep(2)
-            driver.execute_script("arguments[0].click();", btn_Follow)
-
-            wait = WebDriverWait(driver, 60)
-            btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "id('notitifications')")))
-            time.sleep(2)
-            driver.execute_script("arguments[0].click();", btn_Bell)
-
             try:
                 wait = WebDriverWait(driver, 60)
-                checkbox_AllPost = wait.until(
-                    EC.presence_of_element_located((By.XPATH, "//input[@value='all_notifs']")))
-                driver.execute_script("arguments[0].click();", checkbox_AllPost)
-            except:
-                None
+                btn_Follow = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class,'qu-bg--tribe_theme_blue')]")))
+                time.sleep(2)
+                try:
+                    driver.execute_script("arguments[0].click();", btn_Follow)
+                except:
+                    btn_Follow.click()
 
-            try:
                 wait = WebDriverWait(driver, 60)
-                btn_Email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@aria-checked='false' and @type='checkbox']")))
-                driver.execute_script("arguments[0].click();", btn_Email)
+                btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "id('notitifications')")))
+                time.sleep(2)
+                try:
+                    driver.execute_script("arguments[0].click();", btn_Bell)
+                except:
+                    btn_Bell.click()
+
+                try:
+                    wait = WebDriverWait(driver, 60)
+                    checkbox_AllPost = wait.until(
+                        EC.presence_of_element_located((By.XPATH, "//input[@value='all_notifs']")))
+                    driver.execute_script("arguments[0].click();", checkbox_AllPost)
+                except:
+                    None
+
+                try:
+                    wait = WebDriverWait(driver, 60)
+                    btn_Email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@aria-checked='false' and @type='checkbox']")))
+                    driver.execute_script("arguments[0].click();", btn_Email)
+                except:
+                    None
             except:
                 None
 

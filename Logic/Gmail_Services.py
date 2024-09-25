@@ -33,6 +33,7 @@ def ReadMail(driver: webdriver, nameMail: str, href: str):
             wait = WebDriverWait(driver, 60)
             div_element = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='ae4 UI aZ6 id']//tr")))
             div_element.click()
+            time.sleep(10)
             if div_element:
                 wait = WebDriverWait(driver, 60)
                 element_link = wait.until(
@@ -49,7 +50,7 @@ def ReadMail(driver: webdriver, nameMail: str, href: str):
         print(f"[INFO] Error read mail {nameMail}")
 
 def ReadMail_TLDR(driver: webdriver):
-    ReadMail(driver,"TLDR","https://click.pstmrk.it/3s/tldr.tech")
+    ReadMail(driver,"TLDR","confirmed")
 
 def ReadMail_Envalior(driver: webdriver):
     ReadMail(driver,"Envalior","https://email.envalior.com")

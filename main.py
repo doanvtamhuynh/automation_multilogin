@@ -36,9 +36,9 @@ print(profile)
 driver = MultiLogin.Start(ACCOUNT_USERNAME, ACCOUNT_PASSWORD, profile)
 if driver is not None:
 
-    resultLogin = Google.GG_Login(driver, email)
+    # resultLogin = Google.GG_Login(driver, email)
     time.sleep(1)
-
+    resultLogin = True
     if resultLogin is True:
 
         Google.GG_Translate(driver, listWordTranslate)

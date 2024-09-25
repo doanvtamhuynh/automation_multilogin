@@ -232,6 +232,8 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo):
         time.sleep(1)
         actions = ActionChains(driver)
         actions.send_keys(Keys.RETURN).perform()
+        time.sleep(2)
+        actions.send_keys(Keys.RETURN).perform()
         print("[INFO] Success change password")
     except:
         print("[INFO] Error change password")
