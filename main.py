@@ -8,82 +8,93 @@ import Logic.ReadFile as ReadFile
 import Logic.Gmail_Services as Gmail
 from Logic.WriteFile import WriteInfo
 import os
+import argparse
+def main(index_profile: int):
 
-ACCOUNT = ReadFile.GetUsernamePassword()
-ACCOUNT_USERNAME = ACCOUNT[0]
-ACCOUNT_PASSWORD = ACCOUNT[1]
+    ACCOUNT = ReadFile.GetUsernamePassword()
+    ACCOUNT_USERNAME = ACCOUNT[0]
+    ACCOUNT_PASSWORD = ACCOUNT[1]
 
-print(ACCOUNT_PASSWORD)
-print(ACCOUNT_USERNAME)
+    print(ACCOUNT_PASSWORD)
+    print(ACCOUNT_USERNAME)
 
-root_dir = os.getcwd()
-src = rf"{root_dir}\ListFile"
+    root_dir = os.getcwd()
+    src = rf"{root_dir}\ListFile"
 
-listEmail = ReadFile.GetListEmail(rf"{src}\listEmail.txt")
-if listEmail is not None:
-    email = listEmail[0]
+    listEmail = ReadFile.GetListEmail(rf"{src}\listEmail.txt")
+    if listEmail is not None:
+        email = listEmail[index_profile - 1]
 
-listProfile = ReadFile.GetListProfile(rf"{src}\listProfile.txt")
-if listProfile is not None:
-    profile = listProfile[0]
+    listProfile = ReadFile.GetListProfile(rf"{src}\listProfile.txt")
+    if listProfile is not None:
+        profile = listProfile[index_profile - 1]
 
-listWordTranslate = ["hello", "thanks", "good"]
-listWordAlert = ["usa", "car", "football"]
+    listWordTranslate = ["hello", "thanks", "good"]
+    listWordAlert = ["usa", "car", "football"]
 
-print(email)
-print(profile)
+    print(email)
+    print(profile)
 
-driver = MultiLogin.Start(ACCOUNT_USERNAME, ACCOUNT_PASSWORD, profile)
-if driver is not None:
+    driver = MultiLogin.Start(ACCOUNT_USERNAME, ACCOUNT_PASSWORD, profile)
+    if driver is not None:
 
-    resultLogin = Google.GG_Login(driver, email)
-    time.sleep(1)
+        resultLogin = Google.GG_Login(driver, email)
+        time.sleep(1)
 
-    if resultLogin is True:
+        if resultLogin is True:
 
-        Google.GG_Translate(driver, listWordTranslate)
-        time.sleep(2)
-        Google.GG_ALert(driver, listWordAlert)
-        time.sleep(2)
+            Google.GG_Translate(driver, listWordTranslate)
+            time.sleep(2)
+            Google.GG_ALert(driver, listWordAlert)
+            time.sleep(2)
 
-        #Sign In Other Website
-        OtherWebsite.Website_Youtube(driver)
-        time.sleep(2)
-        OtherWebsite.Website_TLDR(driver, email)
-        time.sleep(2)
-        OtherWebsite.Website_Envalior(driver, email)
-        time.sleep(2)
-        OtherWebsite.Website_InfoQ(driver, email)
-        time.sleep(2)
-        OtherWebsite.Website_Dictionary(driver, email)
-        time.sleep(2)
-        OtherWebsite.Website_Quora(driver)
-        time.sleep(2)
-        OtherWebsite.Website_ITViec(driver)
-        time.sleep(2)
-        OtherWebsite.Website_Foxnews(driver, email)
-        time.sleep(2)
+            #Sign In Other Website
+            OtherWebsite.Website_Youtube(driver)
+            time.sleep(2)
+            OtherWebsite.Website_TLDR(driver, email)
+            time.sleep(2)
+            OtherWebsite.Website_Envalior(driver, email)
+            time.sleep(2)
+            OtherWebsite.Website_InfoQ(driver, email)
+            time.sleep(2)
+            OtherWebsite.Website_Dictionary(driver, email)
+            time.sleep(2)
+            OtherWebsite.Website_Quora(driver)
+            time.sleep(2)
+            OtherWebsite.Website_ITViec(driver)
+            time.sleep(2)
+            OtherWebsite.Website_Foxnews(driver, email)
+            time.sleep(2)
 
-        #Read Mail
-        Gmail.ReadMail_TLDR(driver)
-        time.sleep(2)
-        Gmail.ReadMail_Envalior(driver)
-        time.sleep(2)
-        Gmail.ReadMail_InfoQ(driver)
+            #Read Mail
+            Gmail.ReadMail_TLDR(driver)
+            time.sleep(2)
+            Gmail.ReadMail_Envalior(driver)
+            time.sleep(2)
+            Gmail.ReadMail_InfoQ(driver)
 
-        OtherWebsite.Website_Batdongsan(driver)
-        time.sleep(2)
+            OtherWebsite.Website_Batdongsan(driver)
+            time.sleep(2)
 
-        # Create info
-        newInfoAccount = ReadFile.GetInfoAccount()
-        print(newInfoAccount)
+            # Create info
+            newInfoAccount = ReadFile.GetInfoAccount()
+            print(newInfoAccount)
 
-        # Google Services
-        Google.Change_Info(driver, newInfoAccount)
-        WriteInfo(email, rf"{src}\newEmail.txt")
+            # Google Services
+            Google.Change_Info(driver, newInfoAccount, email)
+            WriteInfo(email, rf"{src}\newEmail.txt")
 
-        #Log out
-        Google.Logout_Devices(driver)
-    time.sleep(5)
-    if driver:
-        MultiLogin.Stop(profile)
+            #Log out
+            Google.Logout_Devices(driver)
+        time.sleep(5)
+        if driver:
+            MultiLogin.Stop(profile)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Chương trình tự động hóa với Selenium.')
+
+    parser.add_argument('index_profile', type=int, help='Vị trí profile')
+
+    args = parser.parse_args()
+
+    main(args.index_profile)
