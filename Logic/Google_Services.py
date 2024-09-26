@@ -104,7 +104,7 @@ def GG_ALert(driver: webdriver, wordList: list):
     except:
         print("[INFO] Error GG Alert")
 
-def Change_Info(driver: webdriver, infoAccount: NewInfo):
+def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> NewEmail:
     try:
         driver.get("https://myaccount.google.com/profile/name/edit")
         wait = WebDriverWait(driver, 60)
@@ -142,6 +142,7 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo):
         time.sleep(1)
         input_recovery.send_keys(infoAccount.recovery)
         input_recovery.send_keys(Keys.ENTER)
+        email.recovery = infoAccount.recovery
         print("[INFO] Success change recovery")
     except Exception as ex:
         print(f"[INFO] Error change recovery: {ex}")
@@ -232,11 +233,16 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo):
         time.sleep(1)
         actions = ActionChains(driver)
         actions.send_keys(Keys.RETURN).perform()
-        time.sleep(2)
-        actions.send_keys(Keys.RETURN).perform()
+        try:
+            time.sleep(2)
+            actions.send_keys(Keys.RETURN).perform()
+        except:
+            None
+        email.password = infoAccount.password
         print("[INFO] Success change password")
     except:
         print("[INFO] Error change password")
+    return email
 
 def Logout_Devices(driver: webdriver):
     try:

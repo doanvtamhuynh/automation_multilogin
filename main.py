@@ -80,7 +80,7 @@ if driver is not None:
 
         # Google Services
         Google.Change_Info(driver, newInfoAccount)
-        WriteInfo(email, newInfoAccount, rf"{src}\newEmail.txt")
+        WriteInfo(email, rf"{src}\newEmail.txt")
 
         #Log out
         Google.Logout_Devices(driver)
