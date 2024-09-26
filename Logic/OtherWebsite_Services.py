@@ -370,8 +370,8 @@ def Website_Youtube(driver: webdriver):
     try:
         array = [
             "https://www.youtube.com/@bisko.adventure",
-            "https://www.youtube.com/@vtv24",
-            "https://www.youtube.com/@KplusSportsOfficial"
+            "https://www.youtube.com/@MrBeast",
+            "https://www.youtube.com/c/V%C4%83nT%C3%B9ng"
             ]
         for link in array:
             try:
@@ -391,6 +391,7 @@ def Website_Youtube(driver: webdriver):
                     EC.presence_of_element_located((By.XPATH, "//div[@class='radio-shape-wiz__label']")))
                 time.sleep(2)
                 click_allNotifi.click()
+                time.sleep(5)
             except:
                 None
         driver.get("https://www.youtube.com/account_notifications")
