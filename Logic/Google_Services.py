@@ -118,7 +118,7 @@ async def GG_ALert(driver: webdriver, wordList: list):
     except:
         print("[INFO] Error GG Alert")
 
-async def Change_Info(driver: webdriver, infoAccount: NewInfo):
+async def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> NewEmail:
     loop = asyncio.get_running_loop()
     try:
         driver.get("https://myaccount.google.com/profile/name/edit")
@@ -160,7 +160,7 @@ async def Change_Info(driver: webdriver, infoAccount: NewInfo):
         await asyncio.sleep(1)
         await loop.run_in_executor(None, input_recovery.send_keys, infoAccount.recovery)
         await loop.run_in_executor(None, input_recovery.send_keys, Keys.ENTER)
-
+        email.recovery = infoAccount.recovery
         print("[INFO] Success change recovery")
     except Exception as ex:
         print(f"[INFO] Error change recovery: {ex}")
@@ -263,9 +263,11 @@ async def Change_Info(driver: webdriver, infoAccount: NewInfo):
             await loop.run_in_executor(None, actions.send_keys(Keys.RETURN).perform)
         except:
             None
+        email.password = infoAccount.password
         print("[INFO] Success change password")
     except:
         print("[INFO] Error change password")
+    return email
 
 async def Logout_Devices(driver: webdriver):
     loop = asyncio.get_running_loop()

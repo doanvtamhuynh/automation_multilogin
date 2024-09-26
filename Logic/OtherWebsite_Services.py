@@ -13,159 +13,166 @@ import asyncio
 
 
 async def Website_TLDR(driver: webdriver, email: NewEmail):
+    loop = asyncio.get_running_loop()
     try:
         driver.get("https://tldr.tech/")
 
         wait = WebDriverWait(driver, 60)
-        input_email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='email']")))
+        input_email = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//input[@name='email']")))
         await asyncio.sleep(2)
-        input_email.send_keys(email.email)
-        click_submit = driver.find_element(By.XPATH, "//button[@type='submit']")
+        await loop.run_in_executor(None, input_email.send_keys, email.email)
+        click_submit = await loop.run_in_executor(None, driver.find_element, By.XPATH, "//button[@type='submit']")
         await asyncio.sleep(2)
-        click_submit.click()
+        await loop.run_in_executor(None, click_submit.click)
 
         try:
             wait = WebDriverWait(driver, 10)
-            btn_click_here = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='underline']")))
+            btn_click_here = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[@class='underline']")))
             await asyncio.sleep(1)
-            btn_click_here.click()
+            await loop.run_in_executor(None, btn_click_here.click)
         except:
             print("")
 
         await asyncio.sleep(2)
         wait = WebDriverWait(driver, 60)
-        btn_save1 = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
+        btn_save1 = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
         await asyncio.sleep(2)
-        btn_save1.click()
+        await loop.run_in_executor(None, btn_save1.click)
 
         await asyncio.sleep(2)
         wait = WebDriverWait(driver, 60)
-        btn_save2 = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
+        btn_save2 = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
         await asyncio.sleep(2)
-        btn_save2.click()
+        await loop.run_in_executor(None, btn_save2.click)
 
         await asyncio.sleep(2)
         wait = WebDriverWait(driver, 60)
-        btn_save3 = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
+        btn_save3 = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
         await asyncio.sleep(2)
-        btn_save3.click()
+        await loop.run_in_executor(None, btn_save3.click)
+
 
         await asyncio.sleep(2)
         wait = WebDriverWait(driver, 60)
-        input_text = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='company_website']")))
+        input_text = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//input[@name='company_website']")))
         await asyncio.sleep(2)
-        input_text.send_keys("skyboss.com")
+        await loop.run_in_executor(None, input_text.send_keys, "skyboss.com")
 
         await asyncio.sleep(2)
         wait = WebDriverWait(driver, 60)
-        btn_submit = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
+        btn_submit = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
         await asyncio.sleep(2)
-        btn_submit.click()
+        await loop.run_in_executor(None, btn_submit.click)
+
         print("[INFO] Success Website https://tldr.tech/")
     except:
         print("[INFO] Error Website https://tldr.tech/")
 
 async def Website_Envalior(driver: webdriver, email: NewEmail):
+    loop = asyncio.get_running_loop()
     try:
         driver.get("https://www.envalior.com/")
 
         wait = WebDriverWait(driver, 60)
-        input_email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='email']")))
+        input_email = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//input[@name='email']")))
         await asyncio.sleep(2)
-        input_email.send_keys(email.email)
+        await loop.run_in_executor(None, input_email.send_keys, email.email)
 
-        btn_checkbox = driver.find_element(By.XPATH, "//input[@type='checkbox']")
-        driver.execute_script("arguments[0].click();", btn_checkbox)
+        btn_checkbox = await loop.run_in_executor(None, driver.find_element, By.XPATH, "//input[@type='checkbox']")
+        await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();", btn_checkbox)
 
         try:
-            btn_submit = driver.find_element(By.XPATH, "//button[@type='SUBMIT']")
+            btn_submit = await loop.run_in_executor(None, driver.find_element, By.XPATH, "//button[@type='SUBMIT']")
             await asyncio.sleep(2)
-            driver.execute_script("arguments[0].click();", btn_submit)
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();", btn_submit)
         except:
-            btn_submit = driver.find_element(By.XPATH, "//button[@type='submit']")
+            btn_submit = await loop.run_in_executor(None, driver.find_element, By.XPATH, "//button[@type='submit']")
             await asyncio.sleep(2)
-            driver.execute_script("arguments[0].click();", btn_submit)
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();", btn_submit)
         await asyncio.sleep(10)
         print("[INFO] Success Website https://www.envalior.com/")
     except:
         print("[INFO] Error Website https://www.envalior.com/")
 
 async def Website_Foxnews(driver: webdriver, email: NewEmail):
+    loop = asyncio.get_running_loop()
     try:
         driver.get("https://www.foxnews.com/newsletters")
 
         wait = WebDriverWait(driver, 60)
-        btn_subcribe = wait.until(EC.presence_of_element_located((By.XPATH, "(//div[@class='button subscribe'])[1]//a")))
+        btn_subcribe = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "(//div[@class='button subscribe'])[1]//a")))
         await asyncio.sleep(2)
-        btn_subcribe.click()
+        await loop.run_in_executor(None, btn_subcribe.click)
         await asyncio.sleep(2)
 
         actions = ActionChains(driver)
 
-        actions.send_keys(Keys.TAB).perform()
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
         await asyncio.sleep(1)
         wait = WebDriverWait(driver, 60)
-        input_question = wait.until(
-            EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
-        input_question.send_keys(email.email)
+        input_question = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
+
+        await loop.run_in_executor(None, input_question.send_keys, email.email)
         await asyncio.sleep(1)
-        actions.send_keys(Keys.TAB).perform()
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
         await asyncio.sleep(1)
-        actions.send_keys(Keys.RETURN).perform()
+        await loop.run_in_executor(None, actions.send_keys(Keys.RETURN).perform)
         await asyncio.sleep(5)
 
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.RETURN).perform()
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.RETURN).perform)
         await asyncio.sleep(2)
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.RETURN).perform()
-        await asyncio.sleep(2)
-
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.RETURN).perform()
-        await asyncio.sleep(2)
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.RETURN).perform()
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.RETURN).perform)
         await asyncio.sleep(2)
 
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.RETURN).perform()
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.RETURN).perform)
         await asyncio.sleep(2)
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.TAB).perform()
-        actions.send_keys(Keys.RETURN).perform()
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.RETURN).perform)
+        await asyncio.sleep(2)
+
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.RETURN).perform)
+        await asyncio.sleep(2)
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.TAB).perform)
+        await loop.run_in_executor(None, actions.send_keys(Keys.RETURN).perform)
+        await asyncio.sleep(2)
         print("[INFO] Success Website https://www.foxnews.com/newsletters")
     except:
         print("[INFO] Error Website https://www.foxnews.com/newsletters")
 
 async def Website_Batdongsan(driver: webdriver):
+    loop = asyncio.get_running_loop()
     try:
         driver.get("https://batdongsan.com.vn/sellernet/trang-dang-nhap")
         wait = WebDriverWait(driver, 60)
-        main_window = driver.current_window_handle
-        btn_LoginGG = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@data-tracking-label='type=Google']")))
+        main_window = await driver.current_window_handle
+        btn_LoginGG = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[@data-tracking-label='type=Google']")))
         await asyncio.sleep(2)
-        btn_LoginGG.click()
+        await loop.run_in_executor(None, btn_LoginGG.click)
         await asyncio.sleep(2)
-        windows = driver.window_handles
+        windows = await driver.window_handles
         result_signin = False
         try:
             for window in windows:
                 if window != main_window:
                     driver.switch_to.window(window)
                     await asyncio.sleep(2)
-                    result_signin = Google.Login_Third_Website(driver)
+                    result_signin = await Google.Login_Third_Website(driver)
                     await asyncio.sleep(2)
                     break
-            driver.switch_to.window(main_window)
+            await driver.switch_to.window(main_window)
         except:
             print("[INFO] Error Login with Google")
 
@@ -173,15 +180,17 @@ async def Website_Batdongsan(driver: webdriver):
         if result_signin is True:
             driver.get("https://batdongsan.com.vn/nha-dat-ban-ha-noi")
             wait = WebDriverWait(driver, 60)
-            btn_bell = wait.until(EC.presence_of_element_located((By.XPATH, "//i[@class='re__icon-switch-off--lg js__save-alert-v3-switch-icon']/span")))
+            btn_bell = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//i[@class='re__icon-switch-off--lg js__save-alert-v3-switch-icon']/span")))
             await asyncio.sleep(2)
-            driver.execute_script("arguments[0].click();", btn_bell)
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                           btn_bell)
 
             await asyncio.sleep(10)
             wait = WebDriverWait(driver, 60)
-            btn_Submit = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@tracking-id='click-save-search-alert-option1']")))
+            btn_Submit = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[@tracking-id='click-save-search-alert-option1']")))
             await asyncio.sleep(2)
-            driver.execute_script("arguments[0].click();", btn_Submit)
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                           btn_Submit)
             print("[INFO] Success Website Bat Dong San")
         else:
             print("[INFO] Error Website Bat Dong San")
@@ -189,15 +198,16 @@ async def Website_Batdongsan(driver: webdriver):
         print("[INFO] Error Website Bat Dong San")
 
 async def Website_Dictionary(driver: webdriver, email: NewEmail):
+    loop = asyncio.get_running_loop()
     try:
         driver.get("https://www.dictionary.com/")
 
         wait = WebDriverWait(driver, 120)
-        input_email = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='text'])[2]")))
+        input_email = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "(//input[@type='text'])[2]")))
         await asyncio.sleep(2)
-        input_email.send_keys(email.email)
+        await loop.run_in_executor(None, input_email.send_keys, email.email)
 
-        btn_submit = driver.find_element(By.XPATH, "(//button[@type='submit'])[2]")
+        btn_submit = await loop.run_in_executor(None, driver.find_element, By.XPATH, "(//button[@type='submit'])[2]")
         await asyncio.sleep(2)
         btn_submit.click()
         print("[INFO] Success Website Dictionary")
@@ -205,88 +215,101 @@ async def Website_Dictionary(driver: webdriver, email: NewEmail):
         print("[INFO] Error Website Dictionary")
 
 async def Website_ITViec(driver: webdriver):
+    loop = asyncio.get_running_loop()
     try:
         driver.get("https://itviec.com/sign_in")
 
         wait = WebDriverWait(driver, 60)
-        btn_LoginGG = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='submit'])[1]")))
+        btn_LoginGG = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "(//button[@type='submit'])[1]")))
         await asyncio.sleep(2)
-        btn_LoginGG.click()
-        result_signin = Google.Login_Third_Website(driver)
+        await loop.run_in_executor(None, btn_LoginGG.click)
+        result_signin = await Google.Login_Third_Website(driver)
         await asyncio.sleep(5)
 
         if result_signin is True:
             wait = WebDriverWait(driver, 30)
-            btn_Next = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[1]")))
+            btn_Next = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[1]")))
             await asyncio.sleep(2)
-            btn_Next.click()
+            await loop.run_in_executor(None, btn_Next.click)
 
             wait = WebDriverWait(driver, 30)
-            btn_Select_Java = wait.until(EC.presence_of_element_located((By.XPATH, "//label[@for='skill_java']")))
+            btn_Select_Java = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//label[@for='skill_java']")))
             await asyncio.sleep(2)
-            driver.execute_script("arguments[0].click();", btn_Select_Java)
-            btn_Select_ReactJs = driver.find_element(By.XPATH, "//label[@for='skill_reactjs']")
-            driver.execute_script("arguments[0].click();", btn_Select_ReactJs)
-            btn_Select_DotNet = driver.find_element(By.XPATH, "//label[@for='skill_net']")
-            driver.execute_script("arguments[0].click();", btn_Select_DotNet)
-            btn_Select_HCM = driver.find_element(By.XPATH, "//label[@for='city_ho-chi-minh-hcm']")
-            driver.execute_script("arguments[0].click();", btn_Select_HCM)
-
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                           btn_Select_Java)
+            btn_Select_ReactJs = await loop.run_in_executor(None, driver.find_element, By.XPATH, "//label[@for='skill_reactjs']")
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                           btn_Select_ReactJs)
+            btn_Select_DotNet = await loop.run_in_executor(None, driver.find_element, By.XPATH, "//label[@for='skill_net']")
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                           btn_Select_DotNet)
+            btn_Select_HCM = await loop.run_in_executor(None, driver.find_element, By.XPATH, "//label[@for='city_ho-chi-minh-hcm']")
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                           btn_Select_HCM)
             wait = WebDriverWait(driver, 30)
-            btn_Subcribe = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@data-jr-onboarding-target='buttonSubmit']")))
+            btn_Subcribe = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[@data-jr-onboarding-target='buttonSubmit']")))
             await asyncio.sleep(2)
-            driver.execute_script("arguments[0].click();", btn_Subcribe)
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                           btn_Subcribe)
         print("[INFO] Success website ITViec")
     except:
         print("[INFO] Error website ITViec")
 
 
 async def Website_Quora(driver: webdriver):
+    loop = asyncio.get_running_loop()
     try:
         driver.get("https://humanity.quora.com")
 
         wait = WebDriverWait(driver, 60)
-        btn_SignIn = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class, 'qu-ml--medium')]")))
+        btn_SignIn = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[contains(@class, 'qu-ml--medium')]")))
         await asyncio.sleep(2)
-        driver.execute_script("arguments[0].click();", btn_SignIn)
+        await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();", btn_SignIn)
 
         wait = WebDriverWait(driver, 60)
-        btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'puppeteer_test_login_button_google')]")))
+        btn_Continue = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'puppeteer_test_login_button_google')]")))
         await asyncio.sleep(2)
-        driver.execute_script("arguments[0].click();", btn_Continue)
-        result_signin = Google.Login_Third_Website(driver)
+        await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();", btn_Continue)
+
+        result_signin = await Google.Login_Third_Website(driver)
         await asyncio.sleep(2)
 
         if result_signin is True:
             try:
                 wait = WebDriverWait(driver, 60)
-                btn_Follow = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class,'qu-bg--tribe_theme_blue')]")))
+                btn_Follow = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[contains(@class,'qu-bg--tribe_theme_blue')]")))
                 await asyncio.sleep(2)
                 try:
-                    driver.execute_script("arguments[0].click();", btn_Follow)
+                    await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                                   btn_Follow)
                 except:
-                    btn_Follow.click()
+                    await loop.run_in_executor(None, btn_Follow.click)
 
                 wait = WebDriverWait(driver, 60)
-                btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "id('notitifications')")))
+                btn_Bell = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "id('notitifications')")))
                 await asyncio.sleep(2)
                 try:
-                    driver.execute_script("arguments[0].click();", btn_Bell)
+                    await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                                   btn_Bell)
                 except:
-                    btn_Bell.click()
+                    await loop.run_in_executor(None, btn_Bell.click)
 
                 try:
                     wait = WebDriverWait(driver, 60)
-                    checkbox_AllPost = wait.until(
-                        EC.presence_of_element_located((By.XPATH, "//input[@value='all_notifs']")))
-                    driver.execute_script("arguments[0].click();", checkbox_AllPost)
+                    checkbox_AllPost = await loop.run_in_executor(None, wait.until,
+                                                            EC.presence_of_element_located((By.XPATH, "//input[@value='all_notifs']")))
+                    await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                                   checkbox_AllPost)
                 except:
                     None
 
                 try:
                     wait = WebDriverWait(driver, 60)
-                    btn_Email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@aria-checked='false' and @type='checkbox']")))
-                    driver.execute_script("arguments[0].click();", btn_Email)
+                    btn_Email = await loop.run_in_executor(None, wait.until,
+                                                                  EC.presence_of_element_located(
+                                                                      (By.XPATH, "//input[@aria-checked='false' and @type='checkbox']")))
+                    await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                                   btn_Email)
                 except:
                     None
             except:
@@ -294,81 +317,103 @@ async def Website_Quora(driver: webdriver):
 
             driver.get("https://www.quora.com/settings/notifications")
             wait = WebDriverWait(driver, 60)
-            btn_Daily = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='NotifSettingsRadioButtonsItem' and @value='2']")))
-            driver.execute_script("arguments[0].scrollIntoView(true);", btn_Daily)
-            driver.execute_script("arguments[0].click();", btn_Daily)
+            btn_Daily = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//input[@name='NotifSettingsRadioButtonsItem' and @value='2']")))
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].scrollIntoView(true);",
+                                                           btn_Daily)
+            await asyncio.get_event_loop().run_in_executor(None, driver.execute_script, "arguments[0].click();",
+                                                           btn_Daily)
 
         print("[INFO] Success website Quora")
     except:
         print("[INFO] Error website Quora")
 
 async def Website_InfoQ(driver: webdriver, email: NewEmail):
+    loop = asyncio.get_running_loop()
     try:
         driver.get("https://infoq.vn/Registers/index")
         wait = WebDriverWait(driver, 60)
-        input_surname = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='first_name']")))
+        input_surname = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//input[@name='first_name']")))
         await asyncio.sleep(2)
-        input_surname.send_keys("Harry")
+        await loop.run_in_executor(None, input_surname.send_keys, "Harry")
+
         wait = WebDriverWait(driver, 60)
-        input_lastname = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='last_name']")))
-        input_lastname.send_keys("Potter")
+        input_lastname = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='last_name']")))
+        await loop.run_in_executor(None, input_lastname.send_keys, "Potter")
+
         wait = WebDriverWait(driver, 60)
-        input_email1 = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='email01']")))
-        input_email1.send_keys(email.email)
+        input_email1 = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='email01']")))
+        await loop.run_in_executor(None, input_email1.send_keys, email.email)
+
         wait = WebDriverWait(driver, 60)
-        input_email2 = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='email02']")))
-        input_email2.send_keys(email.email)
+        input_email2 = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='email02']")))
+        await loop.run_in_executor(None, input_email2.send_keys, email.email)
+
         wait = WebDriverWait(driver, 60)
-        input_password1 = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='pass01']")))
-        input_password1.send_keys("Duchanh456@")
+        input_password1 = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='pass01']")))
+        await loop.run_in_executor(None, input_password1.send_keys, "Duchanh456@")
+
         wait = WebDriverWait(driver, 60)
-        input_password2 = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='pass02']")))
-        input_password2.send_keys("Duchanh456@")
+        input_password2 = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='pass02']")))
+        await loop.run_in_executor(None, input_password2.send_keys, "Duchanh456@")
+
         random_number = random.randint(10000000, 99999999)
         phone_number = f"09{random_number}"
         wait = WebDriverWait(driver, 60)
-        input_phonenumber = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='phone_num1']")))
-        input_phonenumber.send_keys(phone_number)
+        input_phonenumber = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='phone_num1']")))
+        await loop.run_in_executor(None, input_phonenumber.send_keys, phone_number)
+
         wait = WebDriverWait(driver, 60)
-        input_birth = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='birthday']")))
-        input_birth.send_keys("14/03/1999")
+        input_birth = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='birthday']")))
+        await loop.run_in_executor(None, input_birth.send_keys, "14/03/1999")
+
         wait = WebDriverWait(driver, 60)
-        click_gender = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@id='gt_1']")))
-        click_gender.click()
+        click_gender = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//input[@id='gt_1']")))
+        await loop.run_in_executor(None, click_gender.click)
+
         wait = WebDriverWait(driver, 60)
-        dropdown_province = wait.until(EC.presence_of_element_located((By.XPATH, "//select[@name='city_cd']")))
-        select_province = Select(dropdown_province)
-        select_province.select_by_value("56")
+        dropdown_province = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//select[@name='city_cd']")))
+        select_province = await loop.run_in_executor(None, Select, dropdown_province)
+        await loop.run_in_executor(None, select_province.select_by_value, "02")
+
         wait = WebDriverWait(driver, 60)
-        input_district = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='district']")))
-        input_district.send_keys("abc")
+        input_district = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='district']")))
+        await loop.run_in_executor(None, input_district.send_keys, "abc")
+
         wait = WebDriverWait(driver, 60)
-        input_village = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='village']")))
-        input_village.send_keys("abc")
+        input_village = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='village']")))
+        await loop.run_in_executor(None, input_village.send_keys, "abc")
+
         wait = WebDriverWait(driver, 60)
-        input_address = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='address']")))
-        input_address.send_keys("abc")
+        input_address = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='address']")))
+        await loop.run_in_executor(None, input_address.send_keys, "abc")
+
         wait = WebDriverWait(driver, 60)
-        dropdown_question = wait.until(EC.presence_of_element_located((By.XPATH, "//select[@name='secret_question_cd']")))
-        select_question = Select(dropdown_question)
-        select_question.select_by_value("02")
+        dropdown_question = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//select[@name='secret_question_cd']")))
+        select_question = await loop.run_in_executor(None, Select, dropdown_question)
+        await loop.run_in_executor(None, select_question.select_by_value, "02")
+
         wait = WebDriverWait(driver, 60)
-        input_question = wait.until(EC.presence_of_element_located((By.XPATH,  "//input[@name='secret_question_value']")))
-        input_question.send_keys("abc")
+        input_question = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH,  "//input[@name='secret_question_value']")))
+        await loop.run_in_executor(None, input_question.send_keys, "abc")
+
         wait = WebDriverWait(driver, 60)
-        click_check = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='ag_chk']")))
-        click_check.click()
+        click_check = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//input[@name='ag_chk']")))
+        await loop.run_in_executor(None, click_check.click)
+
         wait = WebDriverWait(driver, 60)
-        click_submit = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
-        click_submit.click()
+        click_submit = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
+        await loop.run_in_executor(None, click_submit.click)
+
         wait = WebDriverWait(driver, 60)
-        click_submitForm = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit' and contains(@onclick,'submitForm')]")))
-        click_submitForm.click()
+        click_submitForm = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//button[@type='submit' and contains(@onclick,'submitForm')]")))
+        await loop.run_in_executor(None, click_submitForm.click)
+
         print("[INFO] Success Website https://infoq.vn/Registers/index")
     except:
         print("[INFO] Error Website https://infoq.vn/Registers/index")
 
 async def Website_Youtube(driver: webdriver):
+    loop = asyncio.get_running_loop()
     try:
         array = [
             "https://www.youtube.com/@bisko.adventure",
@@ -379,46 +424,45 @@ async def Website_Youtube(driver: webdriver):
             try:
                 driver.get(link)
                 wait = WebDriverWait(driver, 60)
-                click_subscribe = wait.until(EC.presence_of_element_located((By.XPATH, "//yt-subscribe-button-view-model")))
+                click_subscribe = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//yt-subscribe-button-view-model")))
                 await asyncio.sleep(2)
-                click_subscribe.click()
+                await loop.run_in_executor(None, click_subscribe.click)
                 await asyncio.sleep(3)
+
                 wait = WebDriverWait(driver, 60)
-                click_subscribe2 = wait.until(
-                    EC.presence_of_element_located((By.XPATH, "//yt-subscribe-button-view-model")))
+                click_subscribe2 = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//yt-subscribe-button-view-model")))
                 await asyncio.sleep(2)
-                click_subscribe2.click()
+                await loop.run_in_executor(None, click_subscribe2.click)
                 wait = WebDriverWait(driver, 60)
-                click_allNotifi = wait.until(
-                    EC.presence_of_element_located((By.XPATH, "//div[@class='radio-shape-wiz__label']")))
+                click_allNotifi = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((
+                                            By.XPATH, "//div[@class='radio-shape-wiz__label']")))
+
                 await asyncio.sleep(2)
-                click_allNotifi.click()
+                await loop.run_in_executor(None, click_allNotifi.click)
                 await asyncio.sleep(5)
             except:
                 None
         driver.get("https://www.youtube.com/account_notifications")
         try:
             wait = WebDriverWait(driver, 60)
-            click_family = wait.until(EC.presence_of_element_located((By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[1]//ytd-settings-switch-renderer//tp-yt-paper-toggle-button")))
-            click_family.click()
+            click_family = await loop.run_in_executor(None, wait.until, EC.presence_of_element_located((By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[1]//ytd-settings-switch-renderer//tp-yt-paper-toggle-button")))
+            await loop.run_in_executor(None, click_family.click)
         except:
             None
         try:
-            wait = WebDriverWait(driver, 60)
-            click_preferences1 = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[1]//tp-yt-paper-toggle-button")
-            click_preferences1.click()
+            click_preferences1 = await loop.run_in_executor(None, driver.find_element, By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[1]//tp-yt-paper-toggle-button")
+            await loop.run_in_executor(None, click_preferences1.click)
         except:
             None
         try:
-            wait = WebDriverWait(driver, 60)
-            click_preferences2 = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[2]//tp-yt-paper-toggle-button")
-            click_preferences2.click()
+            click_preferences2 = await loop.run_in_executor(None, driver.find_element, By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[2]//tp-yt-paper-toggle-button")
+            await loop.run_in_executor(None, click_preferences2.click)
+
         except:
             None
         try:
-            wait = WebDriverWait(driver, 60)
-            click_preferences3 = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[3]//tp-yt-paper-toggle-button")
-            click_preferences3.click()
+            click_preferences3 = await loop.run_in_executor(None, driver.find_element, By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[3]//tp-yt-paper-toggle-button")
+            await loop.run_in_executor(None, click_preferences3.click)
         except:
             None
         print("[INFO] Success subscribe youtube")
