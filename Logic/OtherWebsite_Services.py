@@ -11,6 +11,7 @@ import random
 from selenium.webdriver.common.action_chains import ActionChains
 import asyncio
 
+
 async def Website_TLDR(driver: webdriver, email: NewEmail):
     try:
         driver.get("https://tldr.tech/")

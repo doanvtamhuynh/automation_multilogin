@@ -36,8 +36,9 @@ async def task(email: NewEmail, profile: NewProfile):
 
     if driver is not None:
 
-        resultLogin = await Google.GG_Login(driver, email)
-        await asyncio.sleep(2)
+        # resultLogin = await Google.GG_Login(driver, email)
+        # await asyncio.sleep(2)
+        resultLogin = True
 
         if resultLogin is True:
 
@@ -46,48 +47,48 @@ async def task(email: NewEmail, profile: NewProfile):
             await Google.GG_ALert(driver, listWordAlert)
             await asyncio.sleep(2)
 
-            #Sign In Other Website
-            await OtherWebsite.Website_Youtube(driver)
-            await asyncio.sleep(2)
-            await OtherWebsite.Website_TLDR(driver, email)
-            await asyncio.sleep(2)
-            await OtherWebsite.Website_Envalior(driver, email)
-            await asyncio.sleep(2)
-            await OtherWebsite.Website_InfoQ(driver, email)
-            await asyncio.sleep(2)
-            await OtherWebsite.Website_Dictionary(driver, email)
-            await asyncio.sleep(2)
-            await OtherWebsite.Website_Quora(driver)
-            await asyncio.sleep(2)
-            await OtherWebsite.Website_ITViec(driver)
-            await asyncio.sleep(2)
-            await OtherWebsite.Website_Foxnews(driver, email)
-            await asyncio.sleep(2)
-
-            #Read Mail
-            await Gmail.ReadMail_TLDR(driver)
-            await asyncio.sleep(2)
-            await Gmail.ReadMail_Envalior(driver)
-            await asyncio.sleep(2)
-            await Gmail.ReadMail_InfoQ(driver)
-
-            await OtherWebsite.Website_Batdongsan(driver)
-            await asyncio.sleep(2)
-
-            # Create info
-            newInfoAccount = await ReadFile.GetInfoAccount()
-            print(newInfoAccount)
-
-            # Google Services
-            await Google.Change_Info(driver, newInfoAccount)
-            WriteInfo(email, newInfoAccount, rf"{src}\newEmail.txt")
-
-            #Log out
-            await Google.Logout_Devices(driver)
-
-        if driver:
-            await asyncio.sleep(5)
-            await MultiLogin.Stop(profile)
+        #     #Sign In Other Website
+        #     await OtherWebsite.Website_Youtube(driver)
+        #     await asyncio.sleep(2)
+        #     await OtherWebsite.Website_TLDR(driver, email)
+        #     await asyncio.sleep(2)
+        #     await OtherWebsite.Website_Envalior(driver, email)
+        #     await asyncio.sleep(2)
+        #     await OtherWebsite.Website_InfoQ(driver, email)
+        #     await asyncio.sleep(2)
+        #     await OtherWebsite.Website_Dictionary(driver, email)
+        #     await asyncio.sleep(2)
+        #     await OtherWebsite.Website_Quora(driver)
+        #     await asyncio.sleep(2)
+        #     await OtherWebsite.Website_ITViec(driver)
+        #     await asyncio.sleep(2)
+        #     await OtherWebsite.Website_Foxnews(driver, email)
+        #     await asyncio.sleep(2)
+        #
+        #     #Read Mail
+        #     await Gmail.ReadMail_TLDR(driver)
+        #     await asyncio.sleep(2)
+        #     await Gmail.ReadMail_Envalior(driver)
+        #     await asyncio.sleep(2)
+        #     await Gmail.ReadMail_InfoQ(driver)
+        #
+        #     await OtherWebsite.Website_Batdongsan(driver)
+        #     await asyncio.sleep(2)
+        #
+        #     # Create info
+        #     newInfoAccount = await ReadFile.GetInfoAccount()
+        #     print(newInfoAccount)
+        #
+        #     # Google Services
+        #     await Google.Change_Info(driver, newInfoAccount)
+        #     WriteInfo(email, newInfoAccount, rf"{src}\newEmail.txt")
+        #
+        #     #Log out
+        #     await Google.Logout_Devices(driver)
+        #
+        # if driver:
+        #     await asyncio.sleep(5)
+        #     await MultiLogin.Stop(profile)
 
 
 async def main():
