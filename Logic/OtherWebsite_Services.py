@@ -377,7 +377,7 @@ def Website_Youtube(driver: webdriver):
             try:
                 driver.get(link)
                 wait = WebDriverWait(driver, 60)
-                click_subscribe = driver.find_element(By.XPATH, "//yt-subscribe-button-view-model")
+                click_subscribe = wait.until(EC.presence_of_element_located((By.XPATH, "//yt-subscribe-button-view-model")))
                 time.sleep(2)
                 click_subscribe.click()
                 time.sleep(3)
