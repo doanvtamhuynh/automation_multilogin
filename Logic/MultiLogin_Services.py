@@ -1,3 +1,5 @@
+import time
+
 import requests
 import hashlib
 from selenium import webdriver
@@ -13,7 +15,7 @@ MLX_LAUNCHER_V2 = (
 LOCALHOST = "http://127.0.0.1"
 HEADERS = {"Accept": "application/json", "Content-Type": "application/json"}
 
-def signin(username: str, password: str) -> str:
+async def signin(username: str, password: str) -> str:
     payload = {
         "email": username,
         "password": hashlib.md5(password.encode()).hexdigest(),
@@ -27,9 +29,9 @@ def signin(username: str, password: str) -> str:
         return token
     return None
 
-def Start(username: str, password: str, profile: NewProfile) -> webdriver:
+async def Start(username: str, password: str, profile: NewProfile) -> webdriver:
     try:
-        token = signin(username,password)
+        token = await signin(username,password)
         if token is not None:
             HEADERS.update({"Authorization": f"Bearer {token}"})
             r = requests.get(
@@ -48,7 +50,7 @@ def Start(username: str, password: str, profile: NewProfile) -> webdriver:
             return driver
         return None
     except:
-        token = signin(username, password)
+        token = await signin(username, password)
         if token is not None:
             HEADERS.update({"Authorization": f"Bearer {token}"})
             r = requests.get(
@@ -69,7 +71,7 @@ def Start(username: str, password: str, profile: NewProfile) -> webdriver:
             return driver
         return None
 
-def Stop(profile: NewProfile) -> None:
+async def Stop(profile: NewProfile) -> None:
     r = requests.get(f"{MLX_LAUNCHER}/profile/stop/p/{profile.profileID}", headers=HEADERS)
     if r.status_code != 200:
         print(f"\n[INFO] Error while stopping profile: {r.text}\n")

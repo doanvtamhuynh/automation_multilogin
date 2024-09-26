@@ -51,7 +51,7 @@ def GetListProfile(src: str) -> list:
             listProfile.append(new_Profile)
     return listProfile
 
-def GetInfoAccount() -> Info:
+async def GetInfoAccount() -> Info:
     try:
         with open(rf"{src}\listPassword.txt", 'r') as file:
             listPass = file.readlines()
