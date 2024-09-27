@@ -153,6 +153,7 @@ def GG_ALert(driver: webdriver, wordList: list):
 
 def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> NewEmail:
     try:
+        time.sleep(2)
         driver.get("https://myaccount.google.com/profile/name/edit")
         wait = WebDriverWait(driver, 60)
         input_ten = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='text'])[2]")))
@@ -179,6 +180,7 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> New
         print("[INFO] Error change name")
 
     try:
+        time.sleep(2)
         driver.get("https://myaccount.google.com/recovery/email")
         try:
             wait = WebDriverWait(driver, 10)
@@ -216,6 +218,7 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> New
         print("[INFO] Error change gender")
 
     try:
+        time.sleep(2)
         driver.get("https://myaccount.google.com/address/home")
         wait = WebDriverWait(driver, 60)
         input_address = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='text'])[2]")))
@@ -248,6 +251,7 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> New
         print("[INFO] Error change home address")
 
     try:
+        time.sleep(2)
         driver.get("https://myaccount.google.com/address/work")
         wait = WebDriverWait(driver, 60)
         input_address = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='text'])[2]")))
@@ -279,6 +283,7 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> New
         print("[INFO] Error change work address")
 
     try:
+        time.sleep(2)
         driver.get("https://myaccount.google.com/signinoptions/password")
         try:
             wait = WebDriverWait(driver, 10)
@@ -305,6 +310,7 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> New
         time.sleep(1)
         actions = ActionChains(driver)
         actions.send_keys(Keys.RETURN).perform()
+        time.sleep(2)
         try:
             time.sleep(2)
             actions.send_keys(Keys.RETURN).perform()

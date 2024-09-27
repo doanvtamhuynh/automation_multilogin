@@ -244,7 +244,6 @@ def Website_ITViec(driver: webdriver):
 def Website_Quora(driver: webdriver):
     try:
         driver.get("https://humanity.quora.com")
-
         wait = WebDriverWait(driver, 60)
         btn_SignIn = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class, 'qu-ml--medium')]")))
         time.sleep(2)
@@ -255,8 +254,7 @@ def Website_Quora(driver: webdriver):
         time.sleep(2)
         driver.execute_script("arguments[0].click();", btn_Continue)
         result_signin = Google.Login_Third_Website(driver)
-        time.sleep(2)
-
+        time.sleep(5)
         if result_signin is True:
             try:
                 wait = WebDriverWait(driver, 60)
@@ -268,24 +266,23 @@ def Website_Quora(driver: webdriver):
                     driver.execute_script("arguments[0].click();", btn_Follow)
 
                 try:
-                    wait = WebDriverWait(driver, 60)
+                    wait = WebDriverWait(driver, 15)
+                    btn_Bell = wait.until(EC.presence_of_element_located(
+                        (By.XPATH, '//div[@class="q-box qu-display--inline-block"]//button')))
+                    time.sleep(2)
+                    driver.execute_script("arguments[0].click();", btn_Bell)
+                except:
+                    wait = WebDriverWait(driver, 10)
                     btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "id('notitifications')")))
                     time.sleep(2)
                     try:
                         btn_Bell.click()
                     except:
                         driver.execute_script("arguments[0].click();", btn_Bell)
-                except:
-                    wait = WebDriverWait(driver, 60)
-                    btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "//*[name()='svg']//*[@id='notitifications']")))
-                    time.sleep(2)
-                    try:
-                        btn_Bell.click()
-                    except:
-                        driver.execute_script("arguments[0].click();", btn_Bell)
+
 
                 try:
-                    wait = WebDriverWait(driver, 60)
+                    wait = WebDriverWait(driver, 30)
                     checkbox_AllPost = wait.until(
                         EC.presence_of_element_located((By.XPATH, "//input[@value='all_notifs']")))
                     driver.execute_script("arguments[0].click();", checkbox_AllPost)
@@ -293,7 +290,7 @@ def Website_Quora(driver: webdriver):
                     None
 
                 try:
-                    wait = WebDriverWait(driver, 60)
+                    wait = WebDriverWait(driver, 10)
                     btn_Email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@aria-checked='false' and @type='checkbox']")))
                     driver.execute_script("arguments[0].click();", btn_Email)
                 except:
@@ -385,7 +382,7 @@ def Website_Youtube(driver: webdriver):
         wait = WebDriverWait(driver, 60)
         input_search = wait.until(EC.presence_of_element_located((By.XPATH, '//input[@id="search"]')))
         time.sleep(1)
-        driver.execute_script("arguments[0].click();", input_search)
+        input_search.click()
         time.sleep(1)
         actions = ActionChains(driver)
         time.sleep(0.5)
