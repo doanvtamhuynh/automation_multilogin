@@ -4,6 +4,10 @@ from selenium import webdriver
 from selenium.webdriver.chromium.options import ChromiumOptions
 from Models.ProfileMultiLogin import NewProfile
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
+import os
+
+root_dir = os.getcwd()
+extension_path = rf"{root_dir}\captcha.crx"
 
 MLX_BASE = "https://api.multilogin.com"
 MLX_LAUNCHER = "https://launcher.mlx.yt:45001/api/v1"
@@ -42,8 +46,11 @@ def Start(username: str, password: str, profile: NewProfile) -> webdriver:
             else:
                 print(f"\n[INFO] Profile {profile.profileID} started.\n")
             selenium_port = response["data"]["port"]
+
+            options = ChromiumOptions()
+            #options.add_argument("--force-device-scale-factor=0.8")
             driver = webdriver.Remote(
-                command_executor=f"{LOCALHOST}:{selenium_port}", options=ChromiumOptions()
+                command_executor=f"{LOCALHOST}:{selenium_port}", options=options
             )
             return driver
         return None

@@ -234,7 +234,9 @@ def Website_ITViec(driver: webdriver):
             btn_Subcribe = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@data-jr-onboarding-target='buttonSubmit']")))
             time.sleep(2)
             driver.execute_script("arguments[0].click();", btn_Subcribe)
-        print("[INFO] Success website ITViec")
+            print("[INFO] Success website ITViec")
+        else:
+            print("[INFO] Error website ITViec")
     except:
         print("[INFO] Error website ITViec")
 
@@ -261,17 +263,26 @@ def Website_Quora(driver: webdriver):
                 btn_Follow = wait.until(EC.presence_of_element_located((By.XPATH, "//button[contains(@class,'qu-bg--tribe_theme_blue')]")))
                 time.sleep(2)
                 try:
-                    driver.execute_script("arguments[0].click();", btn_Follow)
-                except:
                     btn_Follow.click()
-
-                wait = WebDriverWait(driver, 60)
-                btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "id('notitifications')")))
-                time.sleep(2)
-                try:
-                    driver.execute_script("arguments[0].click();", btn_Bell)
                 except:
-                    btn_Bell.click()
+                    driver.execute_script("arguments[0].click();", btn_Follow)
+
+                try:
+                    wait = WebDriverWait(driver, 60)
+                    btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "id('notitifications')")))
+                    time.sleep(2)
+                    try:
+                        btn_Bell.click()
+                    except:
+                        driver.execute_script("arguments[0].click();", btn_Bell)
+                except:
+                    wait = WebDriverWait(driver, 60)
+                    btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "//*[name()='svg']//*[@id='notitifications']")))
+                    time.sleep(2)
+                    try:
+                        btn_Bell.click()
+                    except:
+                        driver.execute_script("arguments[0].click();", btn_Bell)
 
                 try:
                     wait = WebDriverWait(driver, 60)
@@ -296,7 +307,9 @@ def Website_Quora(driver: webdriver):
             driver.execute_script("arguments[0].scrollIntoView(true);", btn_Daily)
             driver.execute_script("arguments[0].click();", btn_Daily)
 
-        print("[INFO] Success website Quora")
+            print("[INFO] Success website Quora")
+        else:
+            print("[INFO] Error website Quora")
     except:
         print("[INFO] Error website Quora")
 
@@ -368,6 +381,21 @@ def Website_InfoQ(driver: webdriver, email: NewEmail):
 
 def Website_Youtube(driver: webdriver):
     try:
+        driver.get("https://www.youtube.com/")
+        wait = WebDriverWait(driver, 60)
+        input_search = wait.until(EC.presence_of_element_located((By.XPATH, '//input[@id="search"]')))
+        time.sleep(1)
+        driver.execute_script("arguments[0].click();", input_search)
+        time.sleep(1)
+        actions = ActionChains(driver)
+        time.sleep(0.5)
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        actions.send_keys(Keys.TAB).perform()
+        time.sleep(1)
+        actions.send_keys(Keys.RETURN).perform()
+        time.sleep(10)
         array = [
             "https://www.youtube.com/@bisko.adventure",
             "https://www.youtube.com/@MrBeast",
@@ -375,6 +403,7 @@ def Website_Youtube(driver: webdriver):
             ]
         for link in array:
             try:
+
                 driver.get(link)
                 wait = WebDriverWait(driver, 60)
                 click_subscribe = wait.until(EC.presence_of_element_located((By.XPATH, "//yt-subscribe-button-view-model")))

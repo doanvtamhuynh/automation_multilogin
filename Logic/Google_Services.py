@@ -18,13 +18,13 @@ def GG_Login(driver: webdriver, email: NewEmail) -> bool:
         input_email.send_keys(email.email)
         input_email.send_keys(Keys.ENTER)
 
-        try:
-            wait = WebDriverWait(driver, 10)
-            check_captcha = wait.until(EC.presence_of_element_located((By.XPATH, '//iframe[@title="reCAPTCHA"]')))
-            if check_captcha:
-                time.sleep(30)
-        except:
-            None
+        # try:
+        #     wait = WebDriverWait(driver, 10)
+        #     check_captcha = wait.until(EC.presence_of_element_located((By.XPATH, '//iframe[@title="reCAPTCHA"]')))
+        #     if check_captcha:
+        #         time.sleep(30)
+        # except:
+        #     None
 
         wait = WebDriverWait(driver, 60)
         input_password = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='password'][@name='Passwd']")))
@@ -32,13 +32,13 @@ def GG_Login(driver: webdriver, email: NewEmail) -> bool:
         input_password.send_keys(email.password)
         input_password.send_keys(Keys.ENTER)
 
-        try:
-            wait = WebDriverWait(driver, 10)
-            check_captcha = wait.until(EC.presence_of_element_located((By.XPATH, '//iframe[@title="reCAPTCHA"]')))
-            if check_captcha:
-                time.sleep(30)
-        except:
-            None
+        # try:
+        #     wait = WebDriverWait(driver, 10)
+        #     check_captcha = wait.until(EC.presence_of_element_located((By.XPATH, '//iframe[@title="reCAPTCHA"]')))
+        #     if check_captcha:
+        #         time.sleep(30)
+        # except:
+        #     None
 
         try:
             wait = WebDriverWait(driver, 10)
@@ -46,11 +46,18 @@ def GG_Login(driver: webdriver, email: NewEmail) -> bool:
             time.sleep(2)
             click_recovery.click()
 
-            wait = WebDriverWait(driver, 10)
-            input_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
-            time.sleep(2)
-            input_recovery.send_keys(email.recovery)
-            input_recovery.send_keys(Keys.ENTER)
+            try:
+                wait = WebDriverWait(driver, 10)
+                input_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
+                time.sleep(2)
+                input_recovery.send_keys(email.recovery)
+                input_recovery.send_keys(Keys.ENTER)
+            except:
+                wait = WebDriverWait(driver, 10)
+                input_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='email']")))
+                time.sleep(2)
+                input_recovery.send_keys(email.recovery)
+                input_recovery.send_keys(Keys.ENTER)
         except:
             print("[INFO] No need to enter Recovery")
 
@@ -62,14 +69,7 @@ def GG_Login(driver: webdriver, email: NewEmail) -> bool:
         except:
             print("[INFO] No need to enter simple_login")
         print("[INFO] Success Login Google")
-        try:
-            driver.get("https://accounts.google.com/")
-            wait = WebDriverWait(driver, 10)
-            input_email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
-            return True
-        except:
-            print("[INFO] Error Login Google")
-            return False
+        return True
     except:
         print("[INFO] Error Login Google")
         return False
@@ -79,16 +79,40 @@ def Login_Third_Website(driver: webdriver) -> bool:
         wait = WebDriverWait(driver, 60)
         select_account = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@data-authuser='0']")))
         time.sleep(2)
-        select_account.click()
+        try:
+            select_account.click()
+        except:
+            driver.execute_script("arguments[0].click();", select_account)
         time.sleep(1)
         wait = WebDriverWait(driver, 60)
         btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[2]")))
         time.sleep(2)
-        btn_Continue.click()
+        try:
+            btn_Continue.click()
+        except:
+            driver.execute_script("arguments[0].click();", btn_Continue)
         return True
     except:
-        print("[INFO] Error Login third website with Google")
-        return False
+        try:
+            wait = WebDriverWait(driver, 60)
+            select_account = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
+            time.sleep(2)
+            try:
+                select_account.click()
+            except:
+                driver.execute_script("arguments[0].click();", select_account)
+            time.sleep(3)
+            wait = WebDriverWait(driver, 60)
+            btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit'][1]")))
+            time.sleep(2)
+            try:
+                btn_Continue.click()
+            except:
+                driver.execute_script("arguments[0].click();", btn_Continue)
+            return True
+        except:
+            print("[INFO] Error Login third website with Google")
+            return False
 
 def GG_Translate(driver: webdriver, wordList: list):
     try:
@@ -166,6 +190,7 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> New
             actions.send_keys(Keys.RETURN).perform()
         except:
             None
+        time.sleep(5)
         wait = WebDriverWait(driver, 60)
         input_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
         time.sleep(2)
@@ -260,11 +285,11 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> New
             input_password = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='password']")))
             time.sleep(2)
             input_password.send_keys(email.password)
-
             actions = ActionChains(driver)
             actions.send_keys(Keys.RETURN).perform()
         except:
             None
+        time.sleep(5)
         wait = WebDriverWait(driver, 60)
 
         input_password = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='password'])[1]")))

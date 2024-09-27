@@ -32,7 +32,11 @@ def ReadMail(driver: webdriver, nameMail: str, href: str):
         if find_email is True:
             wait = WebDriverWait(driver, 60)
             div_element = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='ae4 UI aZ6 id']//tr")))
-            div_element.click()
+            time.sleep(5)
+            try:
+                div_element.click()
+            except:
+                driver.execute_script("arguments[0].click();", div_element)
             time.sleep(10)
             if div_element:
                 wait = WebDriverWait(driver, 60)
