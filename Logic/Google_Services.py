@@ -46,7 +46,14 @@ def GG_Login(driver: webdriver, email: NewEmail) -> bool:
         except:
             print("[INFO] No need to enter simple_login")
         print("[INFO] Success Login Google")
-        return True
+        try:
+            driver.get("https://accounts.google.com/")
+            wait = WebDriverWait(driver, 10)
+            input_email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
+            return True
+        except:
+            print("[INFO] Error Login Google")
+            return False
     except:
         print("[INFO] Error Login Google")
         return False

@@ -48,10 +48,13 @@ def Start(username: str, password: str, profile: NewProfile) -> webdriver:
             return driver
         return None
     except:
-        driver = webdriver.Remote(
-            command_executor=f"{LOCALHOST}:{selenium_port}", options=FirefoxOptions()
-        )
-        return driver
+        try:
+            driver = webdriver.Remote(
+                command_executor=f"{LOCALHOST}:{selenium_port}", options=FirefoxOptions()
+            )
+            return driver
+        except:
+            return None
 
 def Stop(profile: NewProfile) -> None:
     r = requests.get(f"{MLX_LAUNCHER}/profile/stop/p/{profile.profileID}", headers=HEADERS)
