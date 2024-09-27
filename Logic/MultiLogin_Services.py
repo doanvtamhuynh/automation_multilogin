@@ -50,26 +50,14 @@ async def Start(username: str, password: str, profile: NewProfile) -> webdriver:
             return driver
         return None
     except:
-        token = await signin(username, password)
-        if token is not None:
-            HEADERS.update({"Authorization": f"Bearer {token}"})
-            r = requests.get(
-                f"{MLX_LAUNCHER_V2}/profile/f/{profile.folderID}/p/{profile.profileID}/start?automation_type=selenium",
-                headers=HEADERS,
-            )
-            response = r.json()
-            if r.status_code != 200:
-                print(f"\n[INFO] Error while starting profile: {r.text}\n")
-            else:
-                print(f"\n[INFO] Profile {profile.profileID} started.\n")
-            selenium_port = response["data"]["port"]
-
+        try:
             driver = webdriver.Remote(
-                command_executor=f"{LOCALHOST}:{selenium_port}",
-                options= FirefoxOptions()
+                command_executor=f"{LOCALHOST}:{selenium_port}", options=FirefoxOptions()
             )
             return driver
-        return None
+        except:
+            return None
+
 
 async def Stop(profile: NewProfile) -> None:
     r = requests.get(f"{MLX_LAUNCHER}/profile/stop/p/{profile.profileID}", headers=HEADERS)
