@@ -18,11 +18,27 @@ def GG_Login(driver: webdriver, email: NewEmail) -> bool:
         input_email.send_keys(email.email)
         input_email.send_keys(Keys.ENTER)
 
+        try:
+            wait = WebDriverWait(driver, 10)
+            check_captcha = wait.until(EC.presence_of_element_located((By.XPATH, '//iframe[@title="reCAPTCHA"]')))
+            if check_captcha:
+                time.sleep(30)
+        except:
+            None
+
         wait = WebDriverWait(driver, 60)
         input_password = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='password'][@name='Passwd']")))
         time.sleep(2)
         input_password.send_keys(email.password)
         input_password.send_keys(Keys.ENTER)
+
+        try:
+            wait = WebDriverWait(driver, 10)
+            check_captcha = wait.until(EC.presence_of_element_located((By.XPATH, '//iframe[@title="reCAPTCHA"]')))
+            if check_captcha:
+                time.sleep(30)
+        except:
+            None
 
         try:
             wait = WebDriverWait(driver, 10)
@@ -140,6 +156,16 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> New
 
     try:
         driver.get("https://myaccount.google.com/recovery/email")
+        try:
+            wait = WebDriverWait(driver, 10)
+            input_password = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='password']")))
+            time.sleep(2)
+            input_password.send_keys(email.password)
+
+            actions = ActionChains(driver)
+            actions.send_keys(Keys.RETURN).perform()
+        except:
+            None
         wait = WebDriverWait(driver, 60)
         input_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='email']")))
         time.sleep(2)
@@ -229,9 +255,23 @@ def Change_Info(driver: webdriver, infoAccount: NewInfo, email: NewEmail) -> New
 
     try:
         driver.get("https://myaccount.google.com/signinoptions/password")
+        try:
+            wait = WebDriverWait(driver, 10)
+            input_password = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@type='password']")))
+            time.sleep(2)
+            input_password.send_keys(email.password)
+
+            actions = ActionChains(driver)
+            actions.send_keys(Keys.RETURN).perform()
+        except:
+            None
         wait = WebDriverWait(driver, 60)
+
         input_password = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='password'])[1]")))
         time.sleep(2)
+        input_password.click()
+        actions = ActionChains(driver)
+        actions.key_down(Keys.CONTROL).send_keys('a').key_up(Keys.CONTROL).perform()
         input_password.send_keys(infoAccount.password)
 
         re_enter_password = driver.find_element(By.XPATH, "(//input[@type='password'])[2]")

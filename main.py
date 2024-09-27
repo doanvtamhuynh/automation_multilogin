@@ -37,6 +37,7 @@ def main(index_profile: int, index_start = None, single = None):
 
     driver = MultiLogin.Start(ACCOUNT_USERNAME, ACCOUNT_PASSWORD, profile)
     if driver is not None:
+        driver.maximize_window()
         if index_start is None and single is None:
             resultLogin = Google.GG_Login(driver, email)
             time.sleep(1)
