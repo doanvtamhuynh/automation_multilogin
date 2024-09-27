@@ -78,7 +78,7 @@ async def task(email: NewEmail, profile: NewProfile):
             print(newInfoAccount)
 
             # Google Services
-            await Google.Change_Info(driver, newInfoAccount, email)
+            email = await Google.Change_Info(driver, newInfoAccount, email)
             WriteInfo(email, rf"{src}\newEmail.txt")
 
             #Log out
