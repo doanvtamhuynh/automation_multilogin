@@ -53,11 +53,15 @@ def GG_Login(driver: webdriver, email: NewEmail) -> bool:
                 input_recovery.send_keys(email.recovery)
                 input_recovery.send_keys(Keys.ENTER)
             except:
-                wait = WebDriverWait(driver, 10)
-                input_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='email']")))
-                time.sleep(2)
-                input_recovery.send_keys(email.recovery)
-                input_recovery.send_keys(Keys.ENTER)
+                try:
+                    wait = WebDriverWait(driver, 10)
+                    input_recovery = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@name='email']")))
+                    time.sleep(2)
+                    input_recovery.send_keys(email.recovery)
+                    input_recovery.send_keys(Keys.ENTER)
+                except:
+                    print("[INFO] Success Login Google")
+                    return False
         except:
             print("[INFO] No need to enter Recovery")
 
@@ -76,7 +80,7 @@ def GG_Login(driver: webdriver, email: NewEmail) -> bool:
 
 def Login_Third_Website(driver: webdriver) -> bool:
     try:
-        wait = WebDriverWait(driver, 60)
+        wait = WebDriverWait(driver, 20)
         select_account = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@data-authuser='0']")))
         time.sleep(2)
         try:
@@ -84,7 +88,7 @@ def Login_Third_Website(driver: webdriver) -> bool:
         except:
             driver.execute_script("arguments[0].click();", select_account)
         time.sleep(1)
-        wait = WebDriverWait(driver, 60)
+        wait = WebDriverWait(driver, 20)
         btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "(//button[@type='button'])[2]")))
         time.sleep(2)
         try:
@@ -94,7 +98,7 @@ def Login_Third_Website(driver: webdriver) -> bool:
         return True
     except:
         try:
-            wait = WebDriverWait(driver, 60)
+            wait = WebDriverWait(driver, 10)
             select_account = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
             time.sleep(2)
             try:
@@ -102,7 +106,7 @@ def Login_Third_Website(driver: webdriver) -> bool:
             except:
                 driver.execute_script("arguments[0].click();", select_account)
             time.sleep(3)
-            wait = WebDriverWait(driver, 60)
+            wait = WebDriverWait(driver, 10)
             btn_Continue = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit'][1]")))
             time.sleep(2)
             try:

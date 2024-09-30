@@ -59,9 +59,9 @@ def Website_TLDR(driver: webdriver, email: NewEmail):
         btn_submit = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit']")))
         time.sleep(2)
         btn_submit.click()
-        print("[INFO] Success Website https://tldr.tech/")
+        print("[INFO] Success Website TLDR")
     except:
-        print("[INFO] Error Website https://tldr.tech/")
+        print("[INFO] Error Website TLDR")
 
 def Website_Envalior(driver: webdriver, email: NewEmail):
     try:
@@ -84,9 +84,9 @@ def Website_Envalior(driver: webdriver, email: NewEmail):
             time.sleep(2)
             driver.execute_script("arguments[0].click();", btn_submit)
         time.sleep(10)
-        print("[INFO] Success Website https://www.envalior.com/")
+        print("[INFO] Success Website Envalior")
     except:
-        print("[INFO] Error Website https://www.envalior.com/")
+        print("[INFO] Error Website Envalior")
 
 def Website_Foxnews(driver: webdriver, email: NewEmail):
     try:
@@ -140,9 +140,9 @@ def Website_Foxnews(driver: webdriver, email: NewEmail):
         actions.send_keys(Keys.TAB).perform()
         actions.send_keys(Keys.TAB).perform()
         actions.send_keys(Keys.RETURN).perform()
-        print("[INFO] Success Website https://www.foxnews.com/newsletters")
+        print("[INFO] Success Website Foxnew")
     except:
-        print("[INFO] Error Website https://www.foxnews.com/newsletters")
+        print("[INFO] Error Website Foxnew")
 
 def Website_Batdongsan(driver: webdriver):
     try:
@@ -271,6 +271,22 @@ def Website_Quora(driver: webdriver):
                         (By.XPATH, '//div[@class="q-box qu-display--inline-block"]//button')))
                     time.sleep(2)
                     driver.execute_script("arguments[0].click();", btn_Bell)
+
+                    try:
+                        wait = WebDriverWait(driver, 30)
+                        checkbox_AllPost = wait.until(
+                            EC.presence_of_element_located((By.XPATH, "//input[@value='all_notifs']")))
+                        driver.execute_script("arguments[0].click();", checkbox_AllPost)
+                    except:
+                        None
+
+                    try:
+                        wait = WebDriverWait(driver, 10)
+                        btn_Email = wait.until(EC.presence_of_element_located(
+                            (By.XPATH, "//input[@aria-checked='false' and @type='checkbox']")))
+                        driver.execute_script("arguments[0].click();", btn_Email)
+                    except:
+                        None
                 except:
                     wait = WebDriverWait(driver, 10)
                     btn_Bell = wait.until(EC.presence_of_element_located((By.XPATH, "id('notitifications')")))
@@ -280,21 +296,22 @@ def Website_Quora(driver: webdriver):
                     except:
                         driver.execute_script("arguments[0].click();", btn_Bell)
 
+                    try:
+                        wait = WebDriverWait(driver, 30)
+                        checkbox_AllPost = wait.until(
+                            EC.presence_of_element_located((By.XPATH, "//input[@value='all_notifs']")))
+                        driver.execute_script("arguments[0].click();", checkbox_AllPost)
+                    except:
+                        None
 
-                try:
-                    wait = WebDriverWait(driver, 30)
-                    checkbox_AllPost = wait.until(
-                        EC.presence_of_element_located((By.XPATH, "//input[@value='all_notifs']")))
-                    driver.execute_script("arguments[0].click();", checkbox_AllPost)
-                except:
-                    None
+                    try:
+                        wait = WebDriverWait(driver, 10)
+                        btn_Email = wait.until(EC.presence_of_element_located(
+                            (By.XPATH, "//input[@aria-checked='false' and @type='checkbox']")))
+                        driver.execute_script("arguments[0].click();", btn_Email)
+                    except:
+                        None
 
-                try:
-                    wait = WebDriverWait(driver, 10)
-                    btn_Email = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@aria-checked='false' and @type='checkbox']")))
-                    driver.execute_script("arguments[0].click();", btn_Email)
-                except:
-                    None
             except:
                 None
 
@@ -372,9 +389,9 @@ def Website_InfoQ(driver: webdriver, email: NewEmail):
         wait = WebDriverWait(driver, 60)
         click_submitForm = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit' and contains(@onclick,'submitForm')]")))
         click_submitForm.click()
-        print("[INFO] Success Website https://infoq.vn/Registers/index")
+        print("[INFO] Success Website InfoQ")
     except:
-        print("[INFO] Error Website https://infoq.vn/Registers/index")
+        print("[INFO] Error Website InfoQ")
 
 def Website_Youtube(driver: webdriver):
     try:
@@ -423,32 +440,29 @@ def Website_Youtube(driver: webdriver):
         driver.get("https://www.youtube.com/account_notifications")
         try:
             wait = WebDriverWait(driver, 60)
-            click_family = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[1]//ytd-settings-switch-renderer//tp-yt-paper-toggle-button")
+            click_family = wait.until(EC.presence_of_element_located((By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[1]//ytd-settings-switch-renderer//tp-yt-paper-toggle-button")))
             time.sleep(0.5)
             click_family.click()
         except:
             None
         try:
-            wait = WebDriverWait(driver, 60)
             click_preferences1 = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[1]//tp-yt-paper-toggle-button")
             time.sleep(0.5)
             click_preferences1.click()
         except:
             None
         try:
-            wait = WebDriverWait(driver, 60)
             click_preferences2 = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[2]//tp-yt-paper-toggle-button")
             time.sleep(0.5)
             click_preferences2.click()
         except:
             None
         try:
-            wait = WebDriverWait(driver, 60)
             click_preferences3 = driver.find_element(By.XPATH, "//ytd-item-section-renderer[3]//ytd-settings-options-renderer[3]//ytd-settings-switch-renderer[3]//tp-yt-paper-toggle-button")
             time.sleep(0.5)
             click_preferences3.click()
         except:
             None
-        print("[INFO] Success subscribe youtube")
+        print("[INFO] Success Website Youtube")
     except:
-        print("[INFO] Error Website youtube")
+        print("[INFO] Error Website Youtube")
