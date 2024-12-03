@@ -48,7 +48,9 @@ def Start(username: str, password: str, profile: NewProfile) -> webdriver:
             selenium_port = response["data"]["port"]
 
             options = ChromiumOptions()
-            #options.add_argument("--force-device-scale-factor=0.8")
+            # #options.add_argument("--force-device-scale-factor=0.8")
+            # options.add_extension(extension_path)
+            # options.add_encoded_extension(extension_path)
             driver = webdriver.Remote(
                 command_executor=f"{LOCALHOST}:{selenium_port}", options=options
             )
